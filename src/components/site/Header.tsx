@@ -21,7 +21,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b-[3px] border-[#3299e9] bg-white">
-      <div className="mx-auto flex h-[85px] max-w-[1440px] items-center justify-between px-5 lg:px-[141px]">
+      <div className="mx-auto flex h-[85px] max-w-[1440px] items-center justify-between gap-6 px-5 lg:gap-10 lg:px-[60px] 2xl:px-[141px]">
         <Link to="/" className="shrink-0">
           <img
             src={logo.url}
