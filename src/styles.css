@@ -19,6 +19,21 @@
  */
 
 @theme inline {
+  /* Build Financial Wellness brand tokens (from Figma) */
+  --color-navy-blue: var(--token-navy-blue);
+  --color-sage-green-sat50: var(--token-sage-green-sat50);
+  --color-color-white: var(--token-color-white);
+  --color-burnt-orange: var(--token-burnt-orange);
+  --color-dusty-rose-sat67: var(--token-dusty-rose-sat67);
+  --color-navy-blue-sat85-bright79: var(--token-navy-blue-sat85-bright79);
+  --color-color-grey: var(--token-color-grey);
+  --color-sky-blue: var(--token-sky-blue);
+  --color-light-gray: var(--token-light-gray);
+  --color-navy-blue-sat50: var(--token-navy-blue-sat50);
+  --color-dusty-rose: var(--token-dusty-rose);
+  --font-cabin: var(--token-cabin);
+  --shadow-big-shadow: var(--token-big-shadow);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -62,6 +77,20 @@
 }
 
 :root {
+  --token-navy-blue: hsl(217 58% 33%);
+  --token-sage-green-sat50: hsl(150 35% 51%);
+  --token-color-white: hsl(216 33% 97%);
+  --token-burnt-orange: hsl(21 81% 55%);
+  --token-dusty-rose-sat67: hsl(330 50% 45%);
+  --token-navy-blue-sat85-bright79: hsl(217 74% 45%);
+  --token-color-grey: hsl(208 12% 49%);
+  --token-sky-blue: hsl(206 81% 55%);
+  --token-light-gray: hsl(208 10% 80%);
+  --token-navy-blue-sat50: hsl(217 33% 39%);
+  --token-dusty-rose: hsl(330 21% 60%);
+  --token-cabin: "Cabin", ui-sans-serif, system-ui, sans-serif;
+  --token-big-shadow: 0px 15px 35px 0px rgb(39 44 47 / 0.1);
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
