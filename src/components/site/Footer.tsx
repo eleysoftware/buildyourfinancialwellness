@@ -7,24 +7,25 @@ const itemClass = "block text-xs leading-[1.7] text-white transition hover:text-
 
 export function Footer() {
   return (
-    <footer className="bg-navy-blue px-5 py-14 text-white lg:px-[140px]">
-      <div className="mx-auto grid max-w-[1160px] gap-10 md:grid-cols-2 xl:grid-cols-5">
-        <div>
-          <p className="text-2xl font-bold tracking-[-0.03em] text-sky-blue">
+    <footer className="bg-navy-blue px-5 py-14 text-white lg:px-[60px] 2xl:px-[140px]">
+      <div className="mx-auto grid max-w-[1160px] gap-x-5 gap-y-10 md:grid-cols-2 xl:grid-cols-[1.35fr_0.85fr_0.9fr_0.95fr_1.25fr]">
+        <div className="min-w-0">
+          <p className="whitespace-nowrap font-bold tracking-[-0.03em] text-sky-blue text-[clamp(1.05rem,1.55vw,1.5rem)]">
             Build Financial Wellness
           </p>
-          <a
-            href="#"
+          <Link
+            to="/privacy-terms"
+            hash="privacy-policy"
             className="mt-6 inline-block text-lg text-burnt-orange underline underline-offset-4"
           >
             Privacy &amp; Terms
-          </a>
+          </Link>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <p className={columnTitle}>Company</p>
           <div className="mt-5 space-y-2">
-            <a href="#testimonials" className={itemClass}>
+            <a href="/#testimonials" className={itemClass}>
               Testimonials
             </a>
             <Link to="/our-story" className={itemClass}>
@@ -42,25 +43,25 @@ export function Footer() {
           </div>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <p className={columnTitle}>Services</p>
           <div className="mt-5 space-y-2">
-            <a href="#overview" className={itemClass}>
+            <a href="/#overview" className={itemClass}>
               Overview
             </a>
-            <a href="#services" className={itemClass}>
+            <a href="/#services" className={itemClass}>
               The Build Journey
             </a>
-            <a href="#services" className={itemClass}>
+            <a href="/#services" className={itemClass}>
               The Budget Build
             </a>
-            <a href="#services" className={itemClass}>
+            <a href="/#services" className={itemClass}>
               The Budget Mixer
             </a>
           </div>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <p className={columnTitle}>Contact Us</p>
           <div className="mt-5 space-y-2">
             <a href="mailto:info@buildyourfinancialwellness.com" className={itemClass}>
@@ -77,7 +78,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <p className={columnTitle}>Stay up to date</p>
           <p className="mt-5 text-xs leading-[1.7] text-white">Subscribe to our newsletter</p>
           <SubscribeForm formTag="SubscribeOnly" variant="footer" />
