@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as OurStoryRouteImport } from './routes/our-story'
+import { Route as PrivacyTermsRouteImport } from './routes/privacy-terms'
 import { Route as ResourcesRouteImport } from './routes/resources'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const OurStoryRoute = OurStoryRouteImport.update({
   path: '/our-story',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyTermsRoute = PrivacyTermsRouteImport.update({
+  id: '/privacy-terms',
+  path: '/privacy-terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResourcesRoute = ResourcesRouteImport.update({
   id: '/resources',
   path: '/resources',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRoute
   '/faq': typeof FaqRoute
   '/our-story': typeof OurStoryRoute
+  '/privacy-terms': typeof PrivacyTermsRoute
   '/resources': typeof ResourcesRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogRoute
   '/faq': typeof FaqRoute
   '/our-story': typeof OurStoryRoute
+  '/privacy-terms': typeof PrivacyTermsRoute
   '/resources': typeof ResourcesRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,23 @@ export interface FileRoutesById {
   '/blog': typeof BlogRoute
   '/faq': typeof FaqRoute
   '/our-story': typeof OurStoryRoute
+  '/privacy-terms': typeof PrivacyTermsRoute
   '/resources': typeof ResourcesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/blog' | '/faq' | '/our-story' | '/resources'
+  fullPaths:
+    '/' | '/blog' | '/faq' | '/our-story' | '/privacy-terms' | '/resources'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/blog' | '/faq' | '/our-story' | '/resources'
-  id: '__root__' | '/' | '/blog' | '/faq' | '/our-story' | '/resources'
+  to: '/' | '/blog' | '/faq' | '/our-story' | '/privacy-terms' | '/resources'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/faq'
+    | '/our-story'
+    | '/privacy-terms'
+    | '/resources'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +93,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRoute
   FaqRoute: typeof FaqRoute
   OurStoryRoute: typeof OurStoryRoute
+  PrivacyTermsRoute: typeof PrivacyTermsRoute
   ResourcesRoute: typeof ResourcesRoute
 }
 
@@ -109,6 +127,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OurStoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy-terms': {
+      id: '/privacy-terms'
+      path: '/privacy-terms'
+      fullPath: '/privacy-terms'
+      preLoaderRoute: typeof PrivacyTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources': {
       id: '/resources'
       path: '/resources'
@@ -124,6 +149,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRoute,
   FaqRoute: FaqRoute,
   OurStoryRoute: OurStoryRoute,
+  PrivacyTermsRoute: PrivacyTermsRoute,
   ResourcesRoute: ResourcesRoute,
 }
 export const routeTree = rootRouteImport
