@@ -80,7 +80,7 @@ export function SubscribeForm({
 
   if (variant === "footer") {
     return (
-      <form onSubmit={onSubmit} className="mt-3 w-full max-w-[260px]">
+      <form onSubmit={onSubmit} className="mt-3 w-full max-w-[320px]">
         <input type="hidden" name="formTag" value={formTag} />
         <div className="relative">
           <label className="sr-only" htmlFor="footer-email">

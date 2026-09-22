@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "@tanstack/react-router";
 
 import heroImage from "@/assets/hero-image-3-jpg.png.asset.json";
 import overviewImage from "@/assets/section-services-image-jpg.png.asset.json";
