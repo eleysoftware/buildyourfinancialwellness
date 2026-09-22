@@ -20,6 +20,11 @@ One page holding both documents, matching the design:
 - Two jump targets so links can land directly on either policy.
 - Same header and footer, readable line length, responsive.
 
+## Shared footer
+
+- The footer as drawn on the FAQ page becomes the single footer used on every page, including the home page.
+- The "Build Financial Wellness" logo text in the footer always stays on one line, scaling up and down smoothly with the window width instead of wrapping.
+
 ## Links to the new pages
 
 - Support menu (desktop dropdown and mobile menu): FAQ, Resources, Contact Us, Privacy Policy, Terms of Use Policy — plus Blog kept, since the site already has that page.
