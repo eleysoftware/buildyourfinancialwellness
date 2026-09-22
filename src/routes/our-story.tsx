@@ -30,26 +30,10 @@ function OurStory() {
       <Header />
 
       <main className="flex-1">
-        <div className="relative mx-auto w-full max-w-[1440px]">
-          {/* Story image */}
-          <div className="relative mt-8 px-5 lg:absolute lg:right-0 lg:top-0 lg:mt-0 lg:w-[54%] lg:px-0">
-            <img
-              src={storyImage.url}
-              alt="TaMara West, founder of Build Financial Wellness"
-              className="w-full rounded-lg object-cover lg:rounded-none"
-              style={{
-                WebkitMaskImage:
-                  "linear-gradient(to right, transparent 0%, black 22%), linear-gradient(to bottom, black 88%, transparent 100%)",
-                maskImage:
-                  "linear-gradient(to right, transparent 0%, black 22%), linear-gradient(to bottom, black 88%, transparent 100%)",
-                WebkitMaskComposite: "source-in",
-                maskComposite: "intersect",
-              }}
-            />
-          </div>
-
+        <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 lg:grid-cols-[1fr_44%]">
           {/* Story content */}
-          <div className="relative z-10 px-5 pb-16 pt-12 lg:px-[60px] lg:pb-28 lg:pt-[70px] 2xl:px-[140px]">
+          <div className="order-2 px-5 pb-16 pt-10 lg:order-1 lg:px-[60px] lg:pb-28 lg:pt-[70px] 2xl:px-[140px]">
+
             <h1 className="text-[2.25rem] font-normal leading-tight text-navy-blue lg:text-5xl">
               The <em className="not-italic text-sky-blue">BFW</em> Story
             </h1>
