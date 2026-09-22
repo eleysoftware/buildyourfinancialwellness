@@ -84,7 +84,25 @@ function OurStory() {
               </p>
             </div>
           </div>
+
+          {/* Story image */}
+          <div className="order-1 px-5 pt-8 lg:order-2 lg:px-0 lg:pt-0">
+            <img
+              src={storyImage.url}
+              alt="TaMara West, founder of Build Financial Wellness"
+              className="h-full w-full rounded-lg object-cover object-center lg:rounded-none"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to right, transparent 0%, black 20%), linear-gradient(to bottom, black 90%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to right, transparent 0%, black 20%), linear-gradient(to bottom, black 90%, transparent 100%)",
+                WebkitMaskComposite: "source-in",
+                maskComposite: "intersect",
+              }}
+            />
+          </div>
         </div>
+
       </main>
 
       <Footer />
