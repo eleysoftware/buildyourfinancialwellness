@@ -24,6 +24,7 @@ One page holding both documents, matching the design:
 
 - The footer as drawn on the FAQ page becomes the single footer used on every page, including the home page.
 - The "Build Financial Wellness" logo text in the footer always stays on one line, scaling up and down smoothly with the window width instead of wrapping.
+- Footer columns get more room: the gap between them is cut by at least half, giving the first column and the "Stay up to date" column extra width so the email field is noticeably longer.
 
 ## Links to the new pages
 
