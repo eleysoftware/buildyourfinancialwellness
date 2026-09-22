@@ -95,15 +95,16 @@ export function Overview() {
             ))}
           </ul>
           <div className="mt-8 space-y-3">
-            <a href="/faq" className="block text-lg font-semibold text-sky-blue hover:underline">
+            <Link to="/faq" className="block text-lg font-semibold text-sky-blue hover:underline">
               Learn More (FAQ) →
-            </a>
-            <a
-              href="/faq"
+            </Link>
+            <Link
+              to="/faq"
+              hash="who-can-benefit"
               className="block text-lg font-semibold text-sage-green-sat50 hover:underline"
             >
               Who can benefit from financial coaching? →
-            </a>
+            </Link>
           </div>
         </div>
       </div>
