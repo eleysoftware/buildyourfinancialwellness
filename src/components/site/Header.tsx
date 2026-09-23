@@ -93,7 +93,7 @@ export function Header() {
                   supportOpen ? "rotate-180" : "rotate-0"
                 }`}
                 onTransitionEnd={(event) => {
-                  if (event.propertyName === "transform" && supportOpen) {
+                  if ((event.propertyName === "rotate" || event.propertyName === "transform") && supportOpen) {
                     setSupportMenuVisible(true);
                   }
                 }}
