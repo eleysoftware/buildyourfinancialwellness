@@ -62,7 +62,14 @@ export function Header() {
               aria-expanded={supportOpen}
             >
               Support
-              <span className="text-sage-green-sat50">^</span>
+              <span
+                aria-hidden="true"
+                className={`inline-block text-sage-green-sat50 transition-transform duration-300 motion-reduce:transition-none ${
+                  supportOpen ? "rotate-180" : "rotate-0"
+                }`}
+              >
+                ^
+              </span>
             </button>
             {supportOpen ? (
               <div className="absolute left-0 top-full z-50 w-60 rounded border border-light-gray bg-white py-2 shadow-big-shadow">
