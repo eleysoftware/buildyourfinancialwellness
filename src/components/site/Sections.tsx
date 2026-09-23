@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 import heroImage from "@/assets/hero-image-3-jpg.png.asset.json";
@@ -323,6 +323,24 @@ function Person({
 
 export function Testimonials() {
   const scroller = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateArrows = useCallback(() => {
+    const el = scroller.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+  }, []);
+
+  useEffect(() => {
+    updateArrows();
+    window.addEventListener("resize", updateArrows);
+    return () => window.removeEventListener("resize", updateArrows);
+  }, [updateArrows]);
+
+  const scrollByAmount = (dir: 1 | -1) =>
+    scroller.current?.scrollBy({ left: 360 * dir, behavior: "smooth" });
 
   return (
     <section id="testimonials" className="scroll-mt-24 bg-slate-50 pb-24 lg:pb-32">
@@ -335,6 +353,7 @@ export function Testimonials() {
         <div className="relative mt-12">
           <div
             ref={scroller}
+            onScroll={updateArrows}
             className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {testimonials.map((item) => (
@@ -357,9 +376,22 @@ export function Testimonials() {
           </div>
 
           <button
+            aria-label="Previous testimonials"
+            onClick={() => scrollByAmount(-1)}
+            className={`absolute left-0 top-1/2 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-light-gray/80 text-white shadow-big-shadow transition hover:bg-light-gray lg:flex ${
+              canScrollLeft ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button
             aria-label="Next testimonials"
-            onClick={() => scroller.current?.scrollBy({ left: 360, behavior: "smooth" })}
-            className="absolute right-0 top-1/2 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-light-gray/80 text-white shadow-big-shadow transition hover:bg-light-gray lg:flex"
+            onClick={() => scrollByAmount(1)}
+            className={`absolute right-0 top-1/2 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-light-gray/80 text-white shadow-big-shadow transition hover:bg-light-gray lg:flex ${
+              canScrollRight ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
