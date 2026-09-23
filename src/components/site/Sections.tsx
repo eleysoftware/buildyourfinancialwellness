@@ -16,6 +16,7 @@ import avatar2 from "@/assets/avatar-2.png.asset.json";
 import avatar3 from "@/assets/avatar-3.png.asset.json";
 import avatar4 from "@/assets/ellipse.png.asset.json";
 import avatar5 from "@/assets/ellipse-2.png.asset.json";
+import avatar6 from "@/assets/kj-testimonial.png.asset.json";
 
 import { DotGrid } from "./DotGrid";
 import { SubscribeForm } from "./SubscribeForm";
@@ -271,25 +272,32 @@ const testimonials = [
   {
     quote:
       "TaMara genuinely wants to help. She gets to the root of the problem and we accomplished a lot in the first session. I'm excited for the next. I'm glad she's my financial coach!",
-    name: "Lavonda Knox",
-    role: "Owner at Rita's Boutique",
+    name: "Lavonda K.",
+    role: "Package Handler at UPS",
     avatar: avatar1,
   },
   {
     quote:
-      "Tamara is excellent at setting attainable goals to achieve. We now have concrete steps to meet our financial goals. 5/5 recommended!",
-    name: "Lauren Ford",
-    role: "Nurse Practitioner at St. Anne's Medical",
+      "TaMara is excellent at setting attainable goals to achieve. We now have concrete steps to meet our financial goals. 5/5 recommended!",
+    name: "Lauren F.",
+    role: "Bird Feeding Expert at WBU",
     avatar: avatar3,
-    second: { name: "Brandon Ford", role: "Nurse Practitioner at St. Anne's Medical", avatar: avatar2 },
+    second: { name: "Brandon F.", role: "eBayer & Private Music Educator", avatar: avatar2 },
   },
   {
     quote:
-      "Tamara is our first experience with a financial coach. We have been very pleased. Highly encourage you to meet one time with her—glad we did.",
-    name: "Melissa Warrix",
-    role: "Owner/Barber at FreshCuts",
+      "TaMara is our first experience with a financial coach. We have been very pleased. Highly encourage you to meet one time with her—glad we did.",
+    name: "Melissa W.",
+    role: "Director of Women's Health at Parkview",
     avatar: avatar5,
-    second: { name: "Dustin Warrix", role: "Owner/Barber at FreshCuts", avatar: avatar4 },
+    second: { name: "Dustin W.", role: "Vice President at Onxx Tool", avatar: avatar4 },
+  },
+  {
+    quote:
+      "TaMara's organized, attention to detail, and well-thought-out plan made for a very pleasant experience collaborating with her. She's A1 and I highly recommend her services!",
+    name: "K. J.",
+    role: "Technology Consultant",
+    avatar: avatar6,
   },
 ];
 
