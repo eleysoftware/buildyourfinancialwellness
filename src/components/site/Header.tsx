@@ -8,6 +8,7 @@ const linkClass =
 
 export function Header() {
   const [supportOpen, setSupportOpen] = useState(false);
+  const [supportMenuVisible, setSupportMenuVisible] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -27,6 +28,30 @@ export function Header() {
 
   const submenuItemClass =
     "block w-full px-4 py-2 text-left text-sm font-bold text-navy-blue hover:bg-color-white";
+
+  function prefersReducedMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function openSupport() {
+    setSupportOpen(true);
+    if (prefersReducedMotion()) {
+      setSupportMenuVisible(true);
+    }
+  }
+
+  function closeSupport() {
+    setSupportMenuVisible(false);
+    setSupportOpen(false);
+  }
+
+  function toggleSupport() {
+    if (supportOpen) {
+      closeSupport();
+    } else {
+      openSupport();
+    }
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b-[3px] border-[#3299e9] bg-white">
@@ -53,25 +78,32 @@ export function Header() {
           </button>
           <div
             className="relative"
-            onMouseEnter={() => setSupportOpen(true)}
-            onMouseLeave={() => setSupportOpen(false)}
+            onMouseEnter={openSupport}
+            onMouseLeave={closeSupport}
           >
             <button
               className={`${linkClass} flex items-center gap-1`}
-              onClick={() => setSupportOpen((v) => !v)}
+              onClick={toggleSupport}
               aria-expanded={supportOpen}
             >
               Support
               <span
                 aria-hidden="true"
-                className={`inline-block text-sage-green-sat50 transition-transform duration-300 motion-reduce:transition-none ${
+                className={`inline-flex size-3.5 shrink-0 origin-center items-center justify-center text-sage-green-sat50 transition-transform duration-300 motion-reduce:transition-none ${
                   supportOpen ? "rotate-180" : "rotate-0"
                 }`}
+                onTransitionEnd={(event) => {
+                  if (event.propertyName === "transform" && supportOpen) {
+                    setSupportMenuVisible(true);
+                  }
+                }}
               >
-                ^
+                <svg viewBox="0 0 14 14" className="block size-3.5" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M2.5 8.5 7 4l4.5 4.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </span>
             </button>
-            {supportOpen ? (
+            {supportMenuVisible ? (
               <div className="absolute left-0 top-full z-50 w-60 rounded border border-light-gray bg-white py-2 shadow-big-shadow">
                 <Link to="/faq" className={submenuItemClass}>
                   FAQ
@@ -82,7 +114,7 @@ export function Header() {
                 <button
                   className={submenuItemClass}
                   onClick={() => {
-                    setSupportOpen(false);
+                    closeSupport();
                     goToSection("contact");
                   }}
                 >
