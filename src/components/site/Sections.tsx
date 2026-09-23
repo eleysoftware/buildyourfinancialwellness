@@ -155,22 +155,20 @@ export function Services() {
           Support for Every Step of <span className="text-sky-blue">Your</span> Journey.
         </h2>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-12 grid auto-rows-fr gap-x-8 gap-y-12 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service) => (
             <div
               key={service.title}
-              className={
-                service.recommended
-                  ? "rounded bg-dusty-rose-sat67 p-4 pt-0 shadow-big-shadow"
-                  : "rounded"
-              }
+              className="relative flex h-full min-w-0 px-4 pb-4 pt-14"
             >
               {service.recommended ? (
-                <p className="py-3 text-center text-xl font-bold text-color-white lg:text-[27px]">
-                  RECOMMENDED
-                </p>
+                <div className="absolute inset-0 rounded bg-dusty-rose-sat67 shadow-big-shadow">
+                  <p className="flex h-14 items-center justify-center text-center text-xl font-bold text-color-white lg:text-[27px]">
+                    RECOMMENDED
+                  </p>
+                </div>
               ) : null}
-              <article className="flex h-full flex-col overflow-hidden rounded bg-white shadow-big-shadow transition hover:shadow-[8px_8px_8px_0px_rgb(50_153_233)]">
+              <article className="relative z-10 flex h-full min-w-0 flex-col overflow-hidden rounded bg-white shadow-big-shadow transition hover:shadow-[8px_8px_8px_0px_rgb(50_153_233)]">
                 <img
                   src={service.image.url}
                   alt={service.title}
@@ -183,7 +181,7 @@ export function Services() {
                   </h3>
                   <p className="mt-4 text-sm font-semibold text-dusty-rose-sat67">{service.lead}</p>
                   <p className="mt-4 text-sm leading-relaxed text-navy-blue-sat50">{service.body}</p>
-                  <p className="mt-6 text-sm font-medium text-sky-blue">{service.meta}</p>
+                  <p className="mt-auto pt-6 text-sm font-medium text-sky-blue">{service.meta}</p>
                   <a
                     href="#contact"
                     className={`mt-6 flex h-14 items-center justify-center rounded-[80px] px-4 text-center text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:brightness-110 ${service.ctaClass}`}
