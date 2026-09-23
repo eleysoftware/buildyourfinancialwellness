@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
-import heroImage from "@/assets/hero-image-3-jpg.png.asset.json";
+import heroImage from "@/assets/bfw-hero-image.avif.asset.json";
 import overviewImage from "@/assets/section-services-image-jpg.png.asset.json";
 import thumb1 from "@/assets/service-thumbnail.png.asset.json";
 import thumb2 from "@/assets/service-thumbnail-2.png.asset.json";
@@ -29,7 +29,7 @@ export function Hero() {
         alt="Smiling woman in conversation"
         className="absolute inset-0 -z-10 h-full w-full object-cover object-[60%_center]"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+      <div className="absolute inset-0 -z-10 bg-navy-blue/15" />
       <div className="mx-auto max-w-[1440px] px-5 py-24 lg:px-[150px] lg:py-[117px]">
         <div className="max-w-[664px]">
           <h1 className="text-4xl font-bold leading-[0.95] text-white sm:text-5xl lg:text-6xl lg:leading-[0.83]">
