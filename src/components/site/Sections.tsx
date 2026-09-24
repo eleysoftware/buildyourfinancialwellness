@@ -57,7 +57,7 @@ export function Overview() {
     <section id="overview" className="scroll-mt-24 bg-slate-50 py-20 lg:py-28">
       <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-5 lg:grid-cols-[788px_1fr] lg:gap-16 lg:px-0">
         <div className="relative">
-          <DotGrid color="orange" rows={3} cols={10} className="absolute -top-10 left-8 hidden lg:grid" />
+          <DotGrid color="orange" rows={10} cols={10} className="absolute -top-10 left-8 hidden lg:grid" />
           <img
             src={overviewImage.url}
             alt="Notebook reading 'My secret plan to conquer the world'"
@@ -65,19 +65,17 @@ export function Overview() {
           />
           <DotGrid
             color="sage"
-            rows={6}
+            rows={10}
             cols={10}
             className="absolute -bottom-10 right-4 hidden lg:grid"
           />
         </div>
 
         <div className="px-0 lg:pr-[150px]">
-          <h2 className="text-3xl font-bold leading-tight text-navy-blue lg:text-5xl lg:leading-[0.94]">
-            <span className="text-sky-blue">Build</span> Habits.
-            <br />
-            <span className="text-sky-blue">Build</span> Confidence.
-            <br />
-            <span className="text-sky-blue">Build</span> Financial Wellness.
+          <h2 className="text-[22px] font-bold leading-tight text-navy-blue sm:text-3xl lg:text-[38px] lg:leading-[0.94]">
+            <span className="block whitespace-nowrap"><span className="text-sky-blue">Build</span> Habits.</span>
+            <span className="block whitespace-nowrap"><span className="text-sky-blue">Build</span> Confidence.</span>
+            <span className="block whitespace-nowrap"><span className="text-sky-blue">Build</span> Financial Wellness.</span>
           </h2>
           <p className="mt-8 text-lg leading-loose text-navy-blue-sat50 lg:text-xl">
             Financial wellness goes beyond the numbers. It's about shifting mindsets, creating
@@ -241,8 +239,8 @@ export function Contact() {
         <div className="relative">
           <DotGrid
             color="sky"
-            rows={4}
-            cols={8}
+            rows={10}
+            cols={10}
             className="absolute -left-6 -top-10 hidden lg:grid"
           />
           <div className="relative rounded-[10px] bg-sage-green-sat50 p-8 shadow-big-shadow lg:p-12">
@@ -256,7 +254,7 @@ export function Contact() {
           </div>
           <DotGrid
             color="orange"
-            rows={3}
+            rows={10}
             cols={10}
             className="absolute -bottom-12 right-0 hidden lg:grid"
           />
