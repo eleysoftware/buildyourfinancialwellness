@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
+import blexwareLogo from "@/assets/logo-blexware-inverse.svg.asset.json";
+
 import { SubscribeForm } from "./SubscribeForm";
 
 const columnTitle = "text-lg font-medium text-dusty-rose";
@@ -87,11 +89,13 @@ export function Footer() {
 
       <div className="mx-auto mt-14 flex max-w-[1160px] flex-col gap-3 text-xs sm:flex-row sm:items-center sm:justify-between">
         <p>© 2026 Build Financial Wellness, LLC. All rights reserved.</p>
-        <p className="text-base">
-          Website designer{" "}
-          <span className="ml-1 inline-block rounded bg-white px-3 py-1 text-xl font-bold text-navy-blue">
-            BLEXware
-          </span>
+        <p className="flex items-center gap-3 text-base">
+          <span>Website designer</span>
+          <img
+            src={blexwareLogo.url}
+            alt="BLEXware"
+            className="h-8 w-auto max-w-[132px] object-contain"
+          />
         </p>
       </div>
     </footer>
