@@ -335,8 +335,14 @@ export function Testimonials() {
     return () => window.removeEventListener("resize", updateArrows);
   }, [updateArrows]);
 
-  const scrollByAmount = (dir: 1 | -1) =>
-    scroller.current?.scrollBy({ left: 360 * dir, behavior: "smooth" });
+  const scrollByAmount = (dir: 1 | -1) => {
+    const el = scroller.current;
+    if (!el) return;
+    const firstCard = el.firstElementChild;
+    const cardWidth = firstCard?.getBoundingClientRect().width ?? 320;
+    const gap = Number.parseFloat(window.getComputedStyle(el).columnGap) || 24;
+    el.scrollBy({ left: (cardWidth + gap) * dir, behavior: "smooth" });
+  };
 
   return (
     <section id="testimonials" className="scroll-mt-24 bg-slate-50 pb-24 lg:pb-32">
@@ -350,7 +356,7 @@ export function Testimonials() {
           <div
             ref={scroller}
             onScroll={updateArrows}
-            className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-20 lg:pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {testimonials.map((item) => (
               <article
@@ -374,7 +380,7 @@ export function Testimonials() {
           <button
             aria-label="Previous testimonials"
             onClick={() => scrollByAmount(-1)}
-            className={`absolute left-0 top-1/2 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-light-gray/80 text-white shadow-big-shadow transition hover:bg-light-gray lg:flex ${
+            className={`absolute bottom-1 left-0 flex h-11 w-11 items-center justify-center rounded-full bg-light-gray/80 text-white shadow-big-shadow transition hover:bg-light-gray lg:bottom-auto lg:top-1/2 lg:h-12 lg:w-12 lg:-translate-y-1/2 ${
               canScrollLeft ? "opacity-100" : "pointer-events-none opacity-0"
             }`}
           >
@@ -385,7 +391,7 @@ export function Testimonials() {
           <button
             aria-label="Next testimonials"
             onClick={() => scrollByAmount(1)}
-            className={`absolute right-0 top-1/2 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-light-gray/80 text-white shadow-big-shadow transition hover:bg-light-gray lg:flex ${
+            className={`absolute bottom-1 right-0 flex h-11 w-11 items-center justify-center rounded-full bg-light-gray/80 text-white shadow-big-shadow transition hover:bg-light-gray lg:bottom-auto lg:top-1/2 lg:h-12 lg:w-12 lg:-translate-y-1/2 ${
               canScrollRight ? "opacity-100" : "pointer-events-none opacity-0"
             }`}
           >
