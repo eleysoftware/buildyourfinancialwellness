@@ -5,7 +5,7 @@ import logo from "@/assets/logo-transparent-png.png.asset.json";
 import { useAuth } from "@/hooks/useAuth";
 
 const linkClass =
-  "text-base font-bold text-navy-blue transition-colors hover:text-sage-green-sat50";
+  "whitespace-nowrap text-base font-bold text-navy-blue transition-colors hover:text-sage-green-sat50";
 
 export function Header() {
   const [supportOpen, setSupportOpen] = useState(false);
