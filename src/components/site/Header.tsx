@@ -2,14 +2,16 @@ import { useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 
 import logo from "@/assets/logo-transparent-png.png.asset.json";
+import { useAuth } from "@/hooks/useAuth";
 
 const linkClass =
-  "text-base font-bold text-navy-blue transition-colors hover:text-sage-green-sat50";
+  "whitespace-nowrap text-base font-bold text-navy-blue transition-colors hover:text-sage-green-sat50";
 
 export function Header() {
   const [supportOpen, setSupportOpen] = useState(false);
   const [supportMenuVisible, setSupportMenuVisible] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user } = useAuth();
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
@@ -132,6 +134,9 @@ export function Header() {
               </div>
             ) : null}
           </div>
+          <Link to={user ? "/account" : "/auth"} className={linkClass}>
+            {user ? "My Account" : "Sign In"}
+          </Link>
           <button
             onClick={() => goToSection("contact")}
             className="h-[38px] rounded-[80px] bg-navy-blue px-4 text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:bg-[#57ae83]"
@@ -210,6 +215,13 @@ export function Header() {
           </Link>
           <Link to="/blog" className={`${linkClass} py-2`} onClick={() => setMobileOpen(false)}>
             Blog
+          </Link>
+          <Link
+            to={user ? "/account" : "/auth"}
+            className={`${linkClass} py-2`}
+            onClick={() => setMobileOpen(false)}
+          >
+            {user ? "My Account" : "Sign In"}
           </Link>
           <button
             onClick={() => {
