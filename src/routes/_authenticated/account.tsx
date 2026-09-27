@@ -50,15 +50,11 @@ function AccountPage() {
   const displayName = profile?.display_name ?? user.email?.split("@")[0] ?? "there";
 
   return (
-    <PageShell>
-      <section className="mx-auto w-full max-w-[720px] px-5 py-16 lg:py-24">
-        <h1 className="text-3xl font-bold text-navy-blue lg:text-4xl">
-          Welcome, {displayName}!
-        </h1>
-        <p className="mt-3 text-base text-navy-blue/80">
-          This is your Build Financial Wellness account page.
-        </p>
-
+    <PageShell
+      title={`Welcome, ${displayName}!`}
+      intro="This is your Build Financial Wellness account page."
+    >
+      <section className="w-full max-w-[720px]">
         <div className="mt-10 rounded bg-white p-6 shadow-big-shadow lg:p-8">
           <h2 className="text-xl font-bold text-navy-blue">Your profile</h2>
           <dl className="mt-4 flex flex-col gap-3 text-base">

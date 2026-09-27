@@ -81,17 +81,15 @@ function AuthPage() {
     "h-14 w-full rounded border-2 border-[#bbc8d4] bg-white px-4 text-base font-semibold text-navy-blue placeholder:text-[#bbc8d4] focus:outline-none focus:ring-2 focus:ring-sky-blue";
 
   return (
-    <PageShell>
-      <section className="mx-auto flex w-full max-w-[520px] flex-col px-5 py-16 lg:py-24">
-        <h1 className="text-center text-3xl font-bold text-navy-blue lg:text-4xl">
-          {mode === "sign-in" ? "Welcome back" : "Create your account"}
-        </h1>
-        <p className="mt-3 text-center text-base text-navy-blue/80">
-          {mode === "sign-in"
-            ? "Sign in to access your Build Financial Wellness account."
-            : "Join Build Financial Wellness to start your journey."}
-        </p>
-
+    <PageShell
+      title={mode === "sign-in" ? "Welcome back" : "Create your account"}
+      intro={
+        mode === "sign-in"
+          ? "Sign in to access your Build Financial Wellness account."
+          : "Join Build Financial Wellness to start your journey."
+      }
+    >
+      <section className="mx-auto flex w-full max-w-[520px] flex-col">
         <form onSubmit={onSubmit} className="mt-10 flex flex-col gap-4">
           {mode === "sign-up" ? (
             <div>
