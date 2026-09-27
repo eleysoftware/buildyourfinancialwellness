@@ -1,7 +1,7 @@
 import { createMiddleware } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 
-import type { Database } from "./types";
+import type { Database } from "./database.types";
 import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "./client";
 
 /**

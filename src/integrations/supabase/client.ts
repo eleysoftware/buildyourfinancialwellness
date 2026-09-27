@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 
-import type { Database } from "./types";
+import type { Database } from "./database.types";
 
 // External Supabase project (user-managed). The publishable key is public by
 // design and safe to ship in browser code; RLS enforces access.
