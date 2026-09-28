@@ -55,10 +55,13 @@ Visitors can read the Newsletters list and every newsletter without signing in, 
 
 - New file `supabase/newsletters-setup.sql`:
   - `app_role` enum, `user_roles` table, and a `has_role()` security-definer function (roles are kept separate from profiles).
-  - `newsletters` table (id, slug unique, title, excerpt, body, thumbnail_url, author_name default 'TaMara West', published bool, published_at, timestamps), plus grants and RLS: anyone can read published rows, and admins have full access.
-  - Public `newsletter-thumbnails` storage bucket, where only admins can write.
-  - Sample newsletter rows, plus a commented `insert into user_roles` line for the admin role.
+  - `newsletters` table: id, slug (unique), title, excerpt, issue_year, issue_month, thumbnail_url, pdf_url, author_name (default 'TaMara West'), published bool, and timestamps. Grants and RLS let anyone read published rows (`TO anon, authenticated`), and admins have full access.
+  - Public `newsletters` storage bucket for PDFs and thumbnails, where only admins can write.
+  - Three seeded rows (Jul, Aug, and Sep 2026), plus a commented `insert into user_roles` line for the admin role.
+- Thumbnails are extracted with `pdfimages` (the large page-1 photo in each PDF), resized to about 800px JPG, and uploaded as Lovable Assets together with the three PDFs. The seed rows store those asset URLs, and admin uploads go to Supabase Storage.
+- Sort order is `issue_year desc, issue_month desc`. The date is rendered as `mmm yyyy` (for example `Sep 2026`) from year and month.
+- The detail page embeds the PDF with `<iframe>`/`<object>` and includes a "Download PDF" link as a fallback on phones.
 - Public reads go through the browser Supabase client with TanStack Query. Admin writes go through the browser client under RLS, and the admin route checks `has_role` via RPC.
 - Card styles follow the Figma classes: `shadow-[0px_15px_35px_0px_rgb(0_0_0_/_0.1)]`, title `text-[22px] font-semibold text-[#6d7d8b]`, meta `text-xs text-[#697694]`, and the active page button on a light grey tile. The layout is a responsive CSS grid instead of absolute positioning.
 - Pagination uses a `?page=` search param. Delete `blog.tsx`, then search the codebase (`rg -i blog`) to confirm no references remain, including in labels, links, and metadata. Add `newsletters.index.tsx`, `newsletters.$slug.tsx`, and `_authenticated/account.newsletters.tsx`, and update `database.types.ts`. The public newsletter routes have no auth gate.
-- Design images are uploaded as Lovable Asset pointers, and the Figma avatar is used for the author image.
+- The author image uses the Figma avatar (`ellipse.png`, the TaMara portrait), uploaded as a Lovable Asset.
