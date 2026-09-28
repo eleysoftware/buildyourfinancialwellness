@@ -12,12 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as OurStoryRouteImport } from './routes/our-story'
 import { Route as PrivacyTermsRouteImport } from './routes/privacy-terms'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
+import { Route as NewslettersIndexRouteImport } from './routes/newsletters.index'
+import { Route as NewslettersSlugRouteImport } from './routes/newsletters.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -31,11 +32,6 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -63,82 +59,99 @@ const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
   path: '/account',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const NewslettersIndexRoute = NewslettersIndexRouteImport.update({
+  id: '/newsletters/',
+  path: '/newsletters/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewslettersSlugRoute = NewslettersSlugRouteImport.update({
+  id: '/newsletters/$slug',
+  path: '/newsletters/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRoute
   '/faq': typeof FaqRoute
   '/our-story': typeof OurStoryRoute
   '/privacy-terms': typeof PrivacyTermsRoute
   '/resources': typeof ResourcesRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/newsletters/$slug': typeof NewslettersSlugRoute
+  '/newsletters/': typeof NewslettersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRoute
   '/faq': typeof FaqRoute
   '/our-story': typeof OurStoryRoute
   '/privacy-terms': typeof PrivacyTermsRoute
   '/resources': typeof ResourcesRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/newsletters/$slug': typeof NewslettersSlugRoute
+  '/newsletters': typeof NewslettersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRoute
   '/faq': typeof FaqRoute
   '/our-story': typeof OurStoryRoute
   '/privacy-terms': typeof PrivacyTermsRoute
   '/resources': typeof ResourcesRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
+  '/newsletters/$slug': typeof NewslettersSlugRoute
+  '/newsletters/': typeof NewslettersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/auth'
-    | '/blog'
     | '/faq'
     | '/our-story'
     | '/privacy-terms'
     | '/resources'
     | '/account'
+    | '/newsletters/$slug'
+    | '/newsletters/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
-    | '/blog'
     | '/faq'
     | '/our-story'
     | '/privacy-terms'
     | '/resources'
     | '/account'
+    | '/newsletters/$slug'
+    | '/newsletters'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
-    | '/blog'
     | '/faq'
     | '/our-story'
     | '/privacy-terms'
     | '/resources'
     | '/_authenticated/account'
+    | '/newsletters/$slug'
+    | '/newsletters/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
-  BlogRoute: typeof BlogRoute
   FaqRoute: typeof FaqRoute
   OurStoryRoute: typeof OurStoryRoute
   PrivacyTermsRoute: typeof PrivacyTermsRoute
   ResourcesRoute: typeof ResourcesRoute
+  NewslettersSlugRoute: typeof NewslettersSlugRoute
+  NewslettersIndexRoute: typeof NewslettersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -162,13 +175,6 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -206,6 +212,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccountRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/newsletters/': {
+      id: '/newsletters/'
+      path: '/newsletters'
+      fullPath: '/newsletters/'
+      preLoaderRoute: typeof NewslettersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/newsletters/$slug': {
+      id: '/newsletters/$slug'
+      path: '/newsletters/$slug'
+      fullPath: '/newsletters/$slug'
+      preLoaderRoute: typeof NewslettersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -224,11 +244,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
-  BlogRoute: BlogRoute,
   FaqRoute: FaqRoute,
   OurStoryRoute: OurStoryRoute,
   PrivacyTermsRoute: PrivacyTermsRoute,
   ResourcesRoute: ResourcesRoute,
+  NewslettersSlugRoute: NewslettersSlugRoute,
+  NewslettersIndexRoute: NewslettersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

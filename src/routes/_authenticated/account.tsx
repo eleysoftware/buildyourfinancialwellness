@@ -1,8 +1,9 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { PageShell } from "@/components/site/PageShell";
 import { supabase } from "@/integrations/supabase/client";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
 
 export const Route = createFileRoute("/_authenticated/account")({
   head: () => ({
@@ -26,6 +27,7 @@ function AccountPage() {
   const { user } = Route.useRouteContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { data: isAdmin } = useIsAdmin(user.id);
 
   const { data: profile } = useQuery({
     queryKey: ["profile", user.id],
@@ -80,6 +82,15 @@ function AccountPage() {
             </div>
           </dl>
         </div>
+
+        {isAdmin ? (
+          <div className="mt-6 rounded bg-white p-6 shadow-big-shadow lg:p-8">
+            <h2 className="text-xl font-bold text-navy-blue">Website administration</h2>
+            <Link to="/admin/newsletters" className="mt-3 inline-block font-bold text-sky-blue hover:text-navy-blue">
+              Manage newsletters →
+            </Link>
+          </div>
+        ) : null}
 
         <button
           type="button"
