@@ -14,17 +14,35 @@
 
 Visitors can read the Newsletters list and every newsletter without signing in, with no username or password. Only the admin signs in, using the existing Sign In page, to manage newsletters.
 
-1. **Newsletters page (`/newsletters`)** built to match the Figma design: a "Newsletters" heading with its subtitle, a 3-column card grid (thumbnail, title, summary, author avatar with "TaMara West" and date), and numbered pagination with 9 per page as in the design. Cards stack to 2 columns on tablet and 1 on phone. It uses the **main site Header and Footer**, not the Figma footer.
-2. **Newsletter detail page (`/newsletters/<slug>`)**: a large thumbnail, title, author and date, full article text, and a "Back to Newsletters" link.
+1. **Newsletters page (`/newsletters`)** built to match the Figma card layout. It has the "Newsletters" heading and subtitle, a 3-column grid, and numbered pagination with 9 per page. Each card shows:
+   - A thumbnail, which is the main photo taken from that newsletter's PDF.
+   - A title in the form "Month Year - Headline", for example "September 2026 - A More Manageable Way to Tackle Debt".
+   - A short description written from the newsletter's opening.
+   - The author's photo and "TaMara West".
+   - The date in "mmm yyyy" format, for example "Sep 2026".
+
+   Newsletters are sorted newest first by year and month. Cards stack to 2 columns on tablet and 1 on phone. The page uses the **main site Header and Footer**, not the Figma footer.
+2. **Newsletter detail page (`/newsletters/<slug>`)** shows the thumbnail, title, author, and date, followed by the PDF newsletter itself, viewable on the page and downloadable. It also has a "Back to Newsletters" link.
 3. **Blog is fully replaced by Newsletters**: every "Blog" link, in the Resources dropdown, mobile menu, and footer, becomes "Newsletters" and points to `/newsletters`. The old Blog page and the `/blog` address are removed entirely, with no redirect, and no "Blog" wording remains anywhere on the site. No other navigation changes; those belong to Phase 1.
-4. **Admin management** at `/account/newsletters`, only for signed-in admins. Admins can create, edit, and delete newsletters, upload a thumbnail, and switch each one between Published and Draft. Only published newsletters appear on the public site. Anyone who is not an admin never sees these controls.
-5. **Starter content**: the three thumbnail photos from the design are uploaded to the image library. A few sample newsletters are included so the page doesn't look empty. You can edit or delete them from the admin area.
+4. **Admin management** at `/account/newsletters`, only for signed-in admins. Admins can:
+   - Create, edit, and delete newsletters.
+   - Upload the PDF and a thumbnail, and set the title, description, and month/year.
+   - Switch each newsletter between Published and Draft.
+
+   Only published newsletters appear publicly, and admin controls are never shown to visitors.
+5. **Starting content**: the three newsletters you sent (July, August, and September 2026) are loaded as the first entries, each with its PDF and its extracted thumbnail. The Figma placeholder cards and images are not used.
+
+| Month | Title |
+|---|---|
+| Sep 2026 | September 2026 - A More Manageable Way to Tackle Debt |
+| Aug 2026 | August 2026 - Find Your Financial Rhythm Again |
+| Jul 2026 | July 2026 - Where Does Your Paycheck Go? |
 
 ## What I need from you afterward
 
-- Run one new SQL file in your Supabase SQL Editor. I can't change your Supabase project directly. The file creates the newsletters table, the thumbnail storage, and the admin role.
+- Run one new SQL file in your Supabase SQL Editor. I can't change your Supabase project directly. The file creates the newsletters table, the file storage, the admin role, and the three starting newsletters.
 - Make yourself an admin by running the one-line command included in that file, with your email filled in.
-- Only 3 of the 9 photos in the design were included in the export. Upload the rest, or add real images from the admin area.
+- Review the short descriptions, which I will write from each newsletter's opening. You can edit them in the admin area.
 
 ## Verification
 
