@@ -12,6 +12,8 @@
 
 ## What I'll build
 
+Visitors can read the Newsletters list and every newsletter without signing in, with no username or password. Only the admin signs in, using the existing Sign In page, to manage newsletters.
+
 1. **Newsletters page (`/newsletters`)** built to match the Figma design: a "Newsletters" heading with its subtitle, a 3-column card grid (thumbnail, title, summary, author avatar with "TaMara West" and date), and numbered pagination with 9 per page as in the design. Cards stack to 2 columns on tablet and 1 on phone. It uses the **main site Header and Footer**, not the Figma footer.
 2. **Newsletter detail page (`/newsletters/<slug>`)**: a large thumbnail, title, author and date, full article text, and a "Back to Newsletters" link.
 3. **Blog becomes Newsletters**: the existing "Blog" links in the Resources dropdown, mobile menu, and footer are renamed "Newsletters" and point to `/newsletters`. The old `/blog` address redirects there, so no links break. No other navigation changes; those belong to Phase 1.
