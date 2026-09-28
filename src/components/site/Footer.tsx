@@ -39,8 +39,8 @@ export function Footer() {
             <Link to="/resources" className={`${itemClass} font-bold`}>
               Resources
             </Link>
-            <Link to="/blog" className={`${itemClass} font-bold`}>
-              Blog
+            <Link to="/newsletters" className={`${itemClass} font-bold`}>
+              Newsletters
             </Link>
           </div>
         </div>

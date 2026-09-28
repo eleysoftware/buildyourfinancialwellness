@@ -128,8 +128,8 @@ export function Header() {
                 <Link to="/privacy-terms" hash="terms-of-use" className={submenuItemClass}>
                   Terms of Use Policy
                 </Link>
-                <Link to="/blog" className={submenuItemClass}>
-                  Blog
+                <Link to="/newsletters" className={submenuItemClass}>
+                  Newsletters
                 </Link>
               </div>
             ) : null}
@@ -213,8 +213,8 @@ export function Header() {
           >
             Terms of Use Policy
           </Link>
-          <Link to="/blog" className={`${linkClass} py-2`} onClick={() => setMobileOpen(false)}>
-            Blog
+          <Link to="/newsletters" className={`${linkClass} py-2`} onClick={() => setMobileOpen(false)}>
+            Newsletters
           </Link>
           <Link
             to={user ? "/account" : "/auth"}
