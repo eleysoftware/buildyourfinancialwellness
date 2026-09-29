@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- Newsletters live in the Supabase `newsletters` table (public reads of published rows via browser client); `src/lib/newsletters.ts` falls back to built-in launch issues if the table is unreachable. Why: pages keep working before the owner runs the setup SQL.
+- Admin access uses `user_roles` + `has_role()` RPC (`useIsAdmin`); admin pages live under `_authenticated/admin.*`. Why: roles must never live on profiles or client storage.
