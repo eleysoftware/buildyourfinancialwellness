@@ -92,7 +92,7 @@ export function Footer() {
         <p className="flex items-center gap-3 text-base">
           <span>Website designer</span>
           <img
-            src={blexwareLogo.url}
+            src={blexwareLogo}
             alt="BLEXware"
             className="h-8 w-auto max-w-[132px] object-contain"
           />

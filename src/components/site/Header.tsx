@@ -60,7 +60,7 @@ export function Header() {
       <div className="mx-auto flex h-[85px] max-w-[1440px] items-center justify-between gap-6 px-5 lg:gap-10 lg:px-[60px] 2xl:px-[141px]">
         <Link to="/" className="shrink-0">
           <img
-            src={logo.url}
+            src={logo}
             alt="Build Financial Wellness — our name is our mission"
             className="h-[52px] w-auto lg:h-[78px]"
           />

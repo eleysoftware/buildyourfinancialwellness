@@ -2,9 +2,9 @@ import { supabase } from "@/integrations/supabase/client";
 import sepThumb from "@/assets/newsletter-september-2026.jpg";
 import augThumb from "@/assets/newsletter-august-2026.jpg";
 import julThumb from "@/assets/newsletter-july-2026.jpg";
-import sepPdf from "@/assets/financially-well-september-2026.pdf";
-import augPdf from "@/assets/financially-well-august-2026.pdf";
-import julPdf from "@/assets/financially-well-july-2026.pdf";
+const sepPdf = "/newsletters/financially-well-september-2026.pdf";
+const augPdf = "/newsletters/financially-well-august-2026.pdf";
+const julPdf = "/newsletters/financially-well-july-2026.pdf";
 
 export type Newsletter = {
   id: string;
@@ -46,8 +46,8 @@ export const FALLBACK_NEWSLETTERS: Newsletter[] = [
       "Debt can make it feel like you should be doing more. Discover a steadier, more manageable approach that helps your efforts add up.",
     issue_year: 2026,
     issue_month: 9,
-    thumbnail_url: sepThumb.url,
-    pdf_url: sepPdf.url,
+    thumbnail_url: sepThumb,
+    pdf_url: sepPdf,
     author_name: "TaMara West",
     published: true,
   },
@@ -59,8 +59,8 @@ export const FALLBACK_NEWSLETTERS: Newsletter[] = [
       "As summer winds down and routines return, reconnect with the simple habits that help your money feel in step again.",
     issue_year: 2026,
     issue_month: 8,
-    thumbnail_url: augThumb.url,
-    pdf_url: augPdf.url,
+    thumbnail_url: augThumb,
+    pdf_url: augPdf,
     author_name: "TaMara West",
     published: true,
   },
@@ -72,8 +72,8 @@ export const FALLBACK_NEWSLETTERS: Newsletter[] = [
       "Financial confidence doesn't always start with earning more. Sometimes it starts with understanding how your money moves through your life.",
     issue_year: 2026,
     issue_month: 7,
-    thumbnail_url: julThumb.url,
-    pdf_url: julPdf.url,
+    thumbnail_url: julThumb,
+    pdf_url: julPdf,
     author_name: "TaMara West",
     published: true,
   },

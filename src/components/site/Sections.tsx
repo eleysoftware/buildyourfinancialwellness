@@ -25,7 +25,7 @@ export function Hero() {
   return (
     <section className="relative isolate overflow-hidden">
       <img
-        src={heroImage.url}
+        src={heroImage}
         alt="Smiling woman in conversation"
         className="absolute inset-0 -z-10 h-full w-full object-cover object-[60%_center]"
       />
@@ -59,7 +59,7 @@ export function Overview() {
         <div className="relative">
           <DotGrid color="orange" rows={10} cols={10} className="absolute -top-10 left-8 hidden lg:grid" />
           <img
-            src={overviewImage.url}
+            src={overviewImage}
             alt="Notebook reading 'My secret plan to conquer the world'"
             className="w-full rounded-r shadow-big-shadow lg:max-w-[745px]"
           />
@@ -168,7 +168,7 @@ export function Services() {
               ) : null}
               <article className="relative z-10 flex h-full min-w-0 flex-col overflow-hidden rounded bg-white shadow-big-shadow transition hover:shadow-[8px_8px_8px_0px_rgb(50_153_233)]">
                 <img
-                  src={service.image.url}
+                  src={service.image}
                   alt={service.title}
                   className="h-[168px] w-full object-cover"
                 />
@@ -218,7 +218,7 @@ export function Contact() {
           <ul className="mt-10 space-y-6">
             {contactDetails.map((detail) => (
               <li key={detail.text} className="flex items-start gap-4">
-                <img src={detail.icon.url} alt="" aria-hidden="true" className="mt-1 h-6 w-6" />
+                <img src={detail.icon} alt="" aria-hidden="true" className="mt-1 h-6 w-6" />
                 {detail.href ? (
                   <a
                     href={detail.href}
@@ -302,13 +302,13 @@ function Person({
   name,
   role,
 }: {
-  avatar: { url: string };
+  avatar: string;
   name: string;
   role: string;
 }) {
   return (
     <div className="flex items-center gap-3">
-      <img src={avatar.url} alt={name} className="h-[50px] w-[50px] rounded-full object-cover" />
+      <img src={avatar} alt={name} className="h-[50px] w-[50px] rounded-full object-cover" />
       <div>
         <p className="text-base font-bold text-[#697694]">{name}</p>
         <p className="text-xs text-[#697694]">{role}</p>
@@ -365,7 +365,7 @@ export function Testimonials() {
               >
                 <div className="flex gap-1.5">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <img key={i} src={star.url} alt="" aria-hidden="true" className="h-3.5 w-3.5" />
+                    <img key={i} src={star} alt="" aria-hidden="true" className="h-3.5 w-3.5" />
                   ))}
                 </div>
                 <p className="mt-6 flex-1 text-lg leading-normal text-[#697694]">{item.quote}</p>
