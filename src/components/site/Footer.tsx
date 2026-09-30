@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import blexwareLogo from "@/assets/logo-blexware-inverse.svg.asset.json";
+import blexwareLogo from "@/assets/logo-blexware-inverse.svg";
 
 import { SubscribeForm } from "./SubscribeForm";
 

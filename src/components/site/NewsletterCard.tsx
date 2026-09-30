@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import authorAvatar from "@/assets/newsletter-author.png.asset.json";
+import authorAvatar from "@/assets/newsletter-author.png";
 import { formatIssue, type Newsletter } from "@/lib/newsletters";
 
 export function NewsletterMeta({ newsletter }: { newsletter: Newsletter }) {

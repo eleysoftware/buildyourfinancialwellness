@@ -1,22 +1,22 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
-import heroImage from "@/assets/bfw-hero-image.avif.asset.json";
-import overviewImage from "@/assets/section-services-image-jpg.png.asset.json";
-import thumb1 from "@/assets/service-thumbnail.png.asset.json";
-import thumb2 from "@/assets/service-thumbnail-2.png.asset.json";
-import thumb3 from "@/assets/service-thumbnail-3.png.asset.json";
-import iconLocation from "@/assets/iconcommunicationlocationon24px.png.asset.json";
-import iconCall from "@/assets/iconcommunicationcall24px.png.asset.json";
-import iconEmail from "@/assets/iconcommunicationemail24px.png.asset.json";
-import iconBusiness from "@/assets/iconcommunicationbusiness24px.png.asset.json";
-import star from "@/assets/star.png.asset.json";
-import avatar1 from "@/assets/avatar.png.asset.json";
-import avatar2 from "@/assets/avatar-2.png.asset.json";
-import avatar3 from "@/assets/avatar-3.png.asset.json";
-import avatar4 from "@/assets/ellipse.png.asset.json";
-import avatar5 from "@/assets/ellipse-2.png.asset.json";
-import avatar6 from "@/assets/kj-testimonial.png.asset.json";
+import heroImage from "@/assets/bfw-hero-image.webp";
+import overviewImage from "@/assets/section-services-image-jpg.png";
+import thumb1 from "@/assets/service-thumbnail.png";
+import thumb2 from "@/assets/service-thumbnail-2.png";
+import thumb3 from "@/assets/service-thumbnail-3.png";
+import iconLocation from "@/assets/iconcommunicationlocationon24px.png";
+import iconCall from "@/assets/iconcommunicationcall24px.png";
+import iconEmail from "@/assets/iconcommunicationemail24px.png";
+import iconBusiness from "@/assets/iconcommunicationbusiness24px.png";
+import star from "@/assets/star.png";
+import avatar1 from "@/assets/avatar.png";
+import avatar2 from "@/assets/avatar-2.png";
+import avatar3 from "@/assets/avatar-3.png";
+import avatar4 from "@/assets/ellipse.png";
+import avatar5 from "@/assets/ellipse-2.png";
+import avatar6 from "@/assets/kj-testimonial.png";
 
 import { DotGrid } from "./DotGrid";
 import { SubscribeForm } from "./SubscribeForm";

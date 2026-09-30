@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 
-import logo from "@/assets/logo-transparent-png.png.asset.json";
+import logo from "@/assets/logo-transparent-png.png";
 import { useAuth } from "@/hooks/useAuth";
 
 const linkClass =

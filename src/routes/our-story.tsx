@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import storyImage from "@/assets/our-story-image.png.asset.json";
+import storyImage from "@/assets/our-story-image.png";
 
 const title = "The BFW Story — Build Financial Wellness";
 const description =

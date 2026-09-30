@@ -1,10 +1,10 @@
 import { supabase } from "@/integrations/supabase/client";
-import sepThumb from "@/assets/newsletter-september-2026.jpg.asset.json";
-import augThumb from "@/assets/newsletter-august-2026.jpg.asset.json";
-import julThumb from "@/assets/newsletter-july-2026.jpg.asset.json";
-import sepPdf from "@/assets/financially-well-september-2026.pdf.asset.json";
-import augPdf from "@/assets/financially-well-august-2026.pdf.asset.json";
-import julPdf from "@/assets/financially-well-july-2026.pdf.asset.json";
+import sepThumb from "@/assets/newsletter-september-2026.jpg";
+import augThumb from "@/assets/newsletter-august-2026.jpg";
+import julThumb from "@/assets/newsletter-july-2026.jpg";
+import sepPdf from "@/assets/financially-well-september-2026.pdf";
+import augPdf from "@/assets/financially-well-august-2026.pdf";
+import julPdf from "@/assets/financially-well-july-2026.pdf";
 
 export type Newsletter = {
   id: string;
