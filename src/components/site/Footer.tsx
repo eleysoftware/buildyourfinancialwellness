@@ -37,7 +37,7 @@ export function Footer() {
               FAQ
             </Link>
             <Link to="/resources" className={`${itemClass} font-bold`}>
-              Resources
+              Resource Library
             </Link>
             <Link to="/newsletters" className={`${itemClass} font-bold`}>
               Newsletters

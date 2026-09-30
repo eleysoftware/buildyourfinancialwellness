@@ -88,7 +88,7 @@ export function Header() {
               onClick={toggleSupport}
               aria-expanded={supportOpen}
             >
-              Support
+              Resources
               <span
                 aria-hidden="true"
                 className={`inline-flex size-3.5 shrink-0 origin-center items-center justify-center text-sage-green-sat50 transition-transform duration-300 motion-reduce:transition-none ${
@@ -111,7 +111,7 @@ export function Header() {
                   FAQ
                 </Link>
                 <Link to="/resources" className={submenuItemClass}>
-                  Resources
+                  Resource Library
                 </Link>
                 <button
                   className={submenuItemClass}
@@ -134,15 +134,12 @@ export function Header() {
               </div>
             ) : null}
           </div>
-          <Link to={user ? "/account" : "/auth"} className={linkClass}>
-            {user ? "My Account" : "Sign In"}
-          </Link>
-          <button
-            onClick={() => goToSection("contact")}
-            className="h-[38px] rounded-[80px] bg-navy-blue px-4 text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:bg-[#57ae83]"
+          <Link
+            to={user ? "/account" : "/auth"}
+            className="inline-flex h-[38px] items-center rounded-[80px] bg-navy-blue px-4 text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:bg-[#57ae83]"
           >
-            BOOK A FREE CONSULTATION
-          </button>
+            {user ? "My Account" : "Client Login"}
+          </Link>
         </nav>
 
         <button
@@ -186,7 +183,7 @@ export function Header() {
             FAQ
           </Link>
           <Link to="/resources" className={`${linkClass} py-2`} onClick={() => setMobileOpen(false)}>
-            Resources
+            Resource Library
           </Link>
           <button
             className={`${linkClass} py-2 text-left`}
@@ -218,20 +215,11 @@ export function Header() {
           </Link>
           <Link
             to={user ? "/account" : "/auth"}
-            className={`${linkClass} py-2`}
             onClick={() => setMobileOpen(false)}
+            className="mt-3 inline-flex h-[44px] items-center justify-center rounded-[80px] bg-navy-blue px-4 text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)]"
           >
-            {user ? "My Account" : "Sign In"}
+            {user ? "My Account" : "Client Login"}
           </Link>
-          <button
-            onClick={() => {
-              setMobileOpen(false);
-              goToSection("contact");
-            }}
-            className="mt-3 h-[44px] rounded-[80px] bg-navy-blue px-4 text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)]"
-          >
-            BOOK A FREE CONSULTATION
-          </button>
         </nav>
       ) : null}
     </header>
