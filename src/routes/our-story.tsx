@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import storyImage from "@/assets/our-story-image.png.asset.json";
+import storyImage from "@/assets/our-story-image.png";
 
 const title = "The BFW Story — Build Financial Wellness";
 const description =
@@ -88,7 +88,7 @@ function OurStory() {
           {/* Story image */}
           <div className="order-1 px-5 pt-8 lg:order-2 lg:px-0 lg:pt-0">
             <img
-              src={storyImage.url}
+              src={storyImage}
               alt="TaMara West, founder of Build Financial Wellness"
               className="h-full w-full rounded-lg object-cover object-center lg:rounded-none"
               style={{

@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
 
-import authorAvatar from "@/assets/newsletter-author.png.asset.json";
+import authorAvatar from "@/assets/newsletter-author.png";
 import { formatIssue, type Newsletter } from "@/lib/newsletters";
 
 export function NewsletterMeta({ newsletter }: { newsletter: Newsletter }) {
   return (
     <div className="flex items-center gap-2">
-      <img src={authorAvatar.url} alt={newsletter.author_name} className="size-[30px] rounded-full object-cover" />
+      <img src={authorAvatar} alt={newsletter.author_name} className="size-[30px] rounded-full object-cover" />
       <span className="text-xs text-[#697694]">{newsletter.author_name}</span>
       <span className="px-2 text-[11px] font-semibold text-[#bbc8d4]">|</span>
       <span className="text-xs text-[#697694]">{formatIssue(newsletter.issue_year, newsletter.issue_month)}</span>
