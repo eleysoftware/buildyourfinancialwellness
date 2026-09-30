@@ -18,7 +18,7 @@ export function Footer() {
           <Link
             to="/privacy-terms"
             hash="privacy-policy"
-            className="mt-6 inline-block text-lg text-burnt-orange underline underline-offset-4"
+            className="mt-6 inline-block text-[14px] text-burnt-orange no-underline"
           >
             Privacy &amp; Terms
           </Link>
@@ -52,13 +52,10 @@ export function Footer() {
               Overview
             </a>
             <a href="/#services" className={itemClass}>
-              The Build Journey
+              Individuals / Households
             </a>
             <a href="/#services" className={itemClass}>
-              The Budget Build
-            </a>
-            <a href="/#services" className={itemClass}>
-              The Budget Mixer
+              Employees / Organizations
             </a>
           </div>
         </div>
@@ -91,11 +88,18 @@ export function Footer() {
         <p>© 2026 Build Financial Wellness, LLC. All rights reserved.</p>
         <p className="flex items-center gap-3 text-base">
           <span>Website designer</span>
-          <img
-            src={blexwareLogo}
-            alt="BLEXware"
-            className="h-8 w-auto max-w-[132px] object-contain"
-          />
+          <a
+            href="https://www.blexware.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center rounded-md bg-white px-3 py-1.5 transition hover:bg-slate-100"
+          >
+            <img
+              src={blexwareLogo}
+              alt="BLEXware"
+              className="h-8 w-auto max-w-[132px] object-contain"
+            />
+          </a>
         </p>
       </div>
     </footer>

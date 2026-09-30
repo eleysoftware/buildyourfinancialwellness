@@ -49,7 +49,7 @@ export function SubscribeForm({
   if (variant === "hero") {
     return (
       <form onSubmit={onSubmit} className="w-full max-w-[564px]">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <input type="hidden" name="formTag" value={formTag} />
           <label className="sr-only" htmlFor="hero-email">
             Email
@@ -66,7 +66,7 @@ export function SubscribeForm({
           <button
             type="submit"
             disabled={sending}
-            className="h-[54px] shrink-0 rounded-[80px] bg-burnt-orange px-10 text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:brightness-110 disabled:opacity-70"
+            className="inline-flex min-h-[54px] max-w-full items-center justify-center whitespace-normal rounded-[80px] bg-burnt-orange px-8 py-3 text-center text-base font-bold leading-snug text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:brightness-110 disabled:opacity-70"
           >
             {sending ? "Sending…" : submitLabel}
           </button>

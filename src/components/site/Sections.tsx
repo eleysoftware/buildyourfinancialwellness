@@ -3,7 +3,6 @@ import { Link } from "@tanstack/react-router";
 
 import heroImage from "@/assets/bfw-hero-image.webp";
 import overviewImage from "@/assets/section-services-image-jpg.png";
-import thumb1 from "@/assets/service-thumbnail.png";
 import thumb2 from "@/assets/service-thumbnail-2.png";
 import thumb3 from "@/assets/service-thumbnail-3.png";
 import iconLocation from "@/assets/iconcommunicationlocationon24px.png";
@@ -43,8 +42,16 @@ export function Hero() {
             Step into your era of financial confidence—judgment-free guidance, expert tools, and a
             clear path to the future you deserve.
           </p>
-          <div className="mt-10">
-            <SubscribeForm formTag="GetStarted" variant="hero" submitLabel="Get Started!" />
+          <p className="mt-6 text-lg leading-relaxed text-color-white lg:text-2xl">
+            Receive your free five-minute Financial Check-In to help you reflect, gain clarity, and
+            discover your next financial step.
+          </p>
+          <div className="mt-8">
+            <SubscribeForm
+              formTag="GetStarted"
+              variant="hero"
+              submitLabel="Get Your Free Financial Check-In"
+            />
           </div>
         </div>
       </div>
@@ -114,32 +121,24 @@ export function Overview() {
 
 const services = [
   {
-    title: "The Build Journey",
-    image: thumb1,
+    title: "Individuals / Households",
+    image: thumb2,
     lead: "Start your journey to financial clarity and confidence.",
-    body: "This ongoing coaching experience helps you shift your money mindset, build strong habits, and make confident financial decisions. Start with a FREE CONSULTATION to explore your goals and see if coaching is the right next step.",
+    body: "This ongoing coaching experience helps you and your household shift your money mindset, build strong habits, and make confident financial decisions. Start with a FREE CONSULTATION to explore your goals and see if coaching is the right next step.",
     meta: "Own your journey | Build a future | Stay empowered",
     cta: "Book Your Free Consultation",
-    ctaClass: "bg-navy-blue underline",
+    href: "https://partners.simply.coach/tamara-west/free-consultation-9",
+    ctaClass: "bg-navy-blue",
     recommended: true,
   },
   {
-    title: "The Budget Build",
-    image: thumb2,
-    lead: "Build a budget that supports your real life.",
-    body: "This one-time, hands-on workshop helps individuals, couples, and families create a personalized, goals-based budget and gain the confidence to stick with it. Want continued support? We're here to help you keep building.",
-    meta: "One session | Real-life tools | Optional next steps",
-    cta: "Book The Budget Build",
-    ctaClass: "bg-sky-blue",
-    recommended: false,
-  },
-  {
-    title: "The Budget Mixer",
+    title: "Employees / Organizations",
     image: thumb3,
-    lead: "Bring your people—we'll bring the budgeting tools.",
-    body: "Whether it's a girls' night, team event, or family meetup, The Budget Mixer turns money talk into a fun, judgment-free group experience. Spark connection, build confidence, and leave with practical tools you can actually use.",
-    meta: "Learn together | Budget better | Leave empowered",
-    cta: "Explore or Plan Your Mixer",
+    lead: "Bring your people—we'll bring the financial wellness tools.",
+    body: "Whether it's a workplace, team, or community group, this session turns money talk into a practical, judgment-free experience. Spark connection, build confidence, and leave with tools your organization can actually use.",
+    meta: "Learn together | Support your team | Leave empowered",
+    cta: "Plan Your Information Session",
+    href: "https://partners.simply.coach/tamara-west/employer-information-session",
     ctaClass: "bg-sky-blue",
     recommended: false,
   },
@@ -153,7 +152,7 @@ export function Services() {
           Support for Every Step of <span className="text-sky-blue">Your</span> Journey.
         </h2>
 
-        <div className="mt-12 grid auto-rows-fr gap-x-8 gap-y-12 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-12 grid auto-rows-fr gap-x-8 gap-y-12 md:grid-cols-2">
           {services.map((service) => (
             <div
               key={service.title}
@@ -175,14 +174,15 @@ export function Services() {
                 <div className="flex flex-1 flex-col p-5">
                   <h3 className="text-[22px] font-semibold text-navy-blue-sat85-bright79">
                     {service.title}
-                    <sup className="ml-1 text-xs text-color-grey">™</sup>
                   </h3>
                   <p className="mt-4 text-sm font-semibold text-dusty-rose-sat67">{service.lead}</p>
                   <p className="mt-4 text-sm leading-relaxed text-navy-blue-sat50">{service.body}</p>
                   <p className="mt-auto pt-6 text-sm font-medium text-sky-blue">{service.meta}</p>
                   <a
-                    href="#contact"
-                    className={`mt-6 flex h-14 items-center justify-center rounded-[80px] px-4 text-center text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:brightness-110 ${service.ctaClass}`}
+                    href={service.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`mt-6 flex h-14 cursor-pointer items-center justify-center rounded-[80px] px-4 text-center text-base font-bold text-white no-underline shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:bg-[#57ae83] focus-visible:bg-[#57ae83] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#57ae83] ${service.ctaClass}`}
                   >
                     {service.cta}
                   </a>
