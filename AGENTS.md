@@ -11,4 +11,4 @@
 - Newsletters live in the Supabase `newsletters` table (public reads of published rows via browser client); `src/lib/newsletters.ts` falls back to built-in launch issues if the table is unreachable. Why: pages keep working before the owner runs the setup SQL.
 - Admin access uses `user_roles` + `has_role()` RPC (`useIsAdmin`); admin pages live under `_authenticated/admin.*`. Why: roles must never live on profiles or client storage.
 
-- Media lives as real files in `src/assets/` (imported by Vite) and PDFs in `public/newsletters/`; do not use Lovable `.asset.json` pointers. Why: the app must render its media on any host (local, Vercel, Lovable).
+- Media lives as real files in `src/assets/` (imported by Vite) or `public/` (stable public URLs); do not use Lovable `.asset.json` pointers. Why: the app must render its media on any host (local, Vercel, Lovable).
