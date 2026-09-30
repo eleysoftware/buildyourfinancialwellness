@@ -39,8 +39,11 @@ export function Footer() {
             <Link to="/resources" className={`${itemClass} font-bold`}>
               Resource Library
             </Link>
-            <Link to="/newsletters" className={`${itemClass} font-bold`}>
-              Newsletters
+            <Link to="/resources" search={{ tab: "newsletters" }} className={`${itemClass} pl-3`}>
+              Newsletter
+            </Link>
+            <Link to="/resources" search={{ tab: "tools" }} className={`${itemClass} pl-3`}>
+              Tools
             </Link>
           </div>
         </div>

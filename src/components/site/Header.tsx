@@ -30,6 +30,8 @@ export function Header() {
 
   const submenuItemClass =
     "block w-full px-4 py-2 text-left text-sm font-bold text-navy-blue hover:bg-color-white";
+  const nestedItemClass =
+    "block w-full py-2 pl-8 pr-4 text-left text-sm font-bold text-navy-blue hover:bg-color-white";
 
   function prefersReducedMotion() {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -113,6 +115,12 @@ export function Header() {
                 <Link to="/resources" className={submenuItemClass}>
                   Resource Library
                 </Link>
+                <Link to="/resources" search={{ tab: "newsletters" }} className={nestedItemClass}>
+                  Newsletter
+                </Link>
+                <Link to="/resources" search={{ tab: "tools" }} className={nestedItemClass}>
+                  Tools
+                </Link>
                 <button
                   className={submenuItemClass}
                   onClick={() => {
@@ -127,9 +135,6 @@ export function Header() {
                 </Link>
                 <Link to="/privacy-terms" hash="terms-of-use" className={submenuItemClass}>
                   Terms of Use Policy
-                </Link>
-                <Link to="/newsletters" className={submenuItemClass}>
-                  Newsletters
                 </Link>
               </div>
             ) : null}
@@ -185,6 +190,22 @@ export function Header() {
           <Link to="/resources" className={`${linkClass} py-2`} onClick={() => setMobileOpen(false)}>
             Resource Library
           </Link>
+          <Link
+            to="/resources"
+            search={{ tab: "newsletters" }}
+            className={`${linkClass} py-2 pl-4`}
+            onClick={() => setMobileOpen(false)}
+          >
+            Newsletter
+          </Link>
+          <Link
+            to="/resources"
+            search={{ tab: "tools" }}
+            className={`${linkClass} py-2 pl-4`}
+            onClick={() => setMobileOpen(false)}
+          >
+            Tools
+          </Link>
           <button
             className={`${linkClass} py-2 text-left`}
             onClick={() => {
@@ -209,9 +230,6 @@ export function Header() {
             onClick={() => setMobileOpen(false)}
           >
             Terms of Use Policy
-          </Link>
-          <Link to="/newsletters" className={`${linkClass} py-2`} onClick={() => setMobileOpen(false)}>
-            Newsletters
           </Link>
           <Link
             to={user ? "/account" : "/auth"}
