@@ -1,7 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
-import sepThumb from "@/assets/newsletter-september-2026.jpg";
-import augThumb from "@/assets/newsletter-august-2026.jpg";
-import julThumb from "@/assets/newsletter-july-2026.jpg";
+const sepThumb = "/newsletters/newsletter-september-2026.jpg";
+const augThumb = "/newsletters/newsletter-august-2026.jpg";
+const julThumb = "/newsletters/newsletter-july-2026.jpg";
 const sepPdf = "/newsletters/financially-well-september-2026.pdf";
 const augPdf = "/newsletters/financially-well-august-2026.pdf";
 const julPdf = "/newsletters/financially-well-july-2026.pdf";
@@ -79,6 +79,29 @@ export const FALLBACK_NEWSLETTERS: Newsletter[] = [
   },
 ];
 
+const LOCAL_LAUNCH_MEDIA = new Map(
+  FALLBACK_NEWSLETTERS.map((newsletter) => [
+    newsletter.slug,
+    { thumbnail_url: newsletter.thumbnail_url, pdf_url: newsletter.pdf_url },
+  ]),
+);
+
+/** Replace legacy Lovable-only launch media URLs with host-independent files. */
+export function withPortableNewsletterMedia(newsletter: Newsletter): Newsletter {
+  const localMedia = LOCAL_LAUNCH_MEDIA.get(newsletter.slug);
+  if (!localMedia) return newsletter;
+
+  return {
+    ...newsletter,
+    thumbnail_url: newsletter.thumbnail_url?.includes("/__l5e/assets-v1/")
+      ? localMedia.thumbnail_url
+      : newsletter.thumbnail_url,
+    pdf_url: newsletter.pdf_url?.includes("/__l5e/assets-v1/")
+      ? localMedia.pdf_url
+      : newsletter.pdf_url,
+  };
+}
+
 const COLUMNS =
   "id, slug, title, excerpt, issue_year, issue_month, thumbnail_url, pdf_url, author_name, published";
 
@@ -90,7 +113,7 @@ export async function fetchPublishedNewsletters(): Promise<Newsletter[]> {
     .order("issue_year", { ascending: false })
     .order("issue_month", { ascending: false });
   if (error) return FALLBACK_NEWSLETTERS;
-  return data as Newsletter[];
+  return (data as Newsletter[]).map(withPortableNewsletterMedia);
 }
 
 export async function fetchNewsletterBySlug(slug: string): Promise<Newsletter | null> {
@@ -101,5 +124,5 @@ export async function fetchNewsletterBySlug(slug: string): Promise<Newsletter | 
     .eq("published", true)
     .maybeSingle();
   if (error) return FALLBACK_NEWSLETTERS.find((n) => n.slug === slug) ?? null;
-  return (data as Newsletter | null) ?? null;
+  return data ? withPortableNewsletterMedia(data as Newsletter) : null;
 }

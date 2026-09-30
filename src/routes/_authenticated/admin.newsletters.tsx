@@ -5,7 +5,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { PageShell } from "@/components/site/PageShell";
 import { supabase } from "@/integrations/supabase/client";
 import { useIsAdmin } from "@/hooks/useIsAdmin";
-import { formatIssue, slugify, type Newsletter } from "@/lib/newsletters";
+import { formatIssue, slugify, withPortableNewsletterMedia, type Newsletter } from "@/lib/newsletters";
 
 export const Route = createFileRoute("/_authenticated/admin/newsletters")({
   head: () => ({
@@ -71,7 +71,7 @@ function AdminNewsletters() {
         .order("issue_year", { ascending: false })
         .order("issue_month", { ascending: false });
       if (error) throw error;
-      return data as Newsletter[];
+      return (data as Newsletter[]).map(withPortableNewsletterMedia);
     },
   });
 
