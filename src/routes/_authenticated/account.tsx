@@ -86,8 +86,14 @@ function AccountPage() {
         {isAdmin ? (
           <div className="mt-6 rounded bg-white p-6 shadow-big-shadow lg:p-8">
             <h2 className="text-xl font-bold text-navy-blue">Website administration</h2>
-            <Link to="/admin/newsletters" className="mt-3 inline-block font-bold text-sky-blue hover:text-navy-blue">
+            <Link to="/admin/newsletters" className="mt-3 block font-bold text-sky-blue hover:text-navy-blue">
               Manage newsletters →
+            </Link>
+            <Link to="/admin/tools" className="mt-3 block font-bold text-sky-blue hover:text-navy-blue">
+              Manage financial tools →
+            </Link>
+            <Link to="/admin/kit" className="mt-3 block font-bold text-sky-blue hover:text-navy-blue">
+              Manage Savings Reset Kit →
             </Link>
           </div>
         ) : null}

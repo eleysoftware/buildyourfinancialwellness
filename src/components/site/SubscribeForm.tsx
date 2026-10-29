@@ -10,6 +10,8 @@ interface SubscribeFormProps {
   variant: Variant;
   withFirstName?: boolean;
   submitLabel?: string;
+  successMessage?: string;
+  onSuccess?: () => void | Promise<void>;
 }
 
 export function SubscribeForm({
@@ -17,6 +19,8 @@ export function SubscribeForm({
   variant,
   withFirstName = false,
   submitLabel = "Submit",
+  successMessage = "Thank you! We'll be in touch shortly.",
+  onSuccess,
 }: SubscribeFormProps) {
   const send = useServerFn(submitForm);
   const [email, setEmail] = useState("");
@@ -31,9 +35,10 @@ export function SubscribeForm({
       const result = await send({ data: { formTag, email, firstName } });
       if (result.ok) {
         setStatus("done");
-        setMessage("Thank you! We'll be in touch shortly.");
+        setMessage(successMessage);
         setEmail("");
         setFirstName("");
+        await onSuccess?.();
       } else {
         setStatus("error");
         setMessage("Something went wrong. Please try again.");

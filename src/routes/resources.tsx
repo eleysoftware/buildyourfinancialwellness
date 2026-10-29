@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { NewsletterList } from "@/components/site/NewsletterList";
 import { PageShell } from "@/components/site/PageShell";
+import { ToolList } from "@/components/site/ToolList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const title = "Resource Library — Build Financial Wellness";
@@ -51,7 +52,7 @@ function Resources() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="tools">
-          <p className="mt-10 text-lg text-navy-blue-sat50">Tools will be added here.</p>
+          <ToolList />
         </TabsContent>
         <TabsContent value="newsletters">
           <NewsletterList page={page} to="/resources" />

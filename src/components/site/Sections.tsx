@@ -18,6 +18,7 @@ import avatar5 from "@/assets/ellipse-2.png";
 import avatar6 from "@/assets/kj-testimonial.png";
 
 import { DotGrid } from "./DotGrid";
+import { SavingsResetKitForm } from "./SavingsResetKitForm";
 import { SubscribeForm } from "./SubscribeForm";
 
 export function Hero() {
@@ -204,6 +205,7 @@ const contactDetails = [
     href: "mailto:info@buildyourfinancialwellness.com",
   },
   { icon: iconCall, text: "1 (888) 225-0352", href: "tel:18882250352" },
+  { icon: iconCall, text: "260-205-8206", href: "tel:2602058206" },
   { icon: iconLocation, text: "429 E Dupont Rd, Unit #2052\nFort Wayne, IN 46825", href: undefined },
 ];
 
@@ -245,12 +247,9 @@ export function Contact() {
           />
           <div className="relative rounded-[10px] bg-sage-green-sat50 p-8 shadow-big-shadow lg:p-12">
             <p className="text-center text-xl text-color-white lg:text-2xl">
-              <span className="font-bold">Download</span> your special edition of the Financially
-              Well newsletter:
-              <br />
-              <em>"Budgeting When Prices Won't Sit Still"</em>
+              <span className="font-bold">Download</span> your Savings Reset Kit
             </p>
-            <SubscribeForm formTag="Newsletter" variant="newsletter" withFirstName />
+            <SavingsResetKitForm />
           </div>
           <DotGrid
             color="orange"

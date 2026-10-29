@@ -80,6 +80,60 @@ export interface Database {
         };
         Relationships: [];
       };
+      financial_tools: {
+        Row: {
+          id: string;
+          slug: string;
+          title: string;
+          pdf_url: string | null;
+          published: boolean;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          slug: string;
+          title: string;
+          pdf_url?: string | null;
+          published?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          slug?: string;
+          title?: string;
+          pdf_url?: string | null;
+          published?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      savings_reset_kit: {
+        Row: {
+          id: string;
+          title: string;
+          pdf_url: string | null;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          title?: string;
+          pdf_url?: string | null;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          title?: string;
+          pdf_url?: string | null;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {

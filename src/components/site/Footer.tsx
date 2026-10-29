@@ -72,6 +72,9 @@ export function Footer() {
             <a href="tel:18882250352" className={itemClass}>
               1-888-225-0352
             </a>
+            <a href="tel:2602058206" className={itemClass}>
+              260-205-8206
+            </a>
             <p className="text-xs leading-[1.7] text-white">
               429 E Dupont Rd, Unit #2052
               <br />

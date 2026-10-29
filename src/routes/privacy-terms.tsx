@@ -60,6 +60,10 @@ function Contact() {
         <a className="text-sky-blue underline" href="tel:18882250352">
           1-888-225-0352
         </a>
+        {" · "}
+        <a className="text-sky-blue underline" href="tel:2602058206">
+          260-205-8206
+        </a>
       </p>
       <p>Address: 429 E. Dupont Rd, Unit 2052, Fort Wayne, IN 46825</p>
     </div>
