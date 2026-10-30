@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { AdminPageTitle } from "@/components/site/AdminNav";
 import { PageShell } from "@/components/site/PageShell";
 import { supabase } from "@/integrations/supabase/client";
 import { useIsAdmin } from "@/hooks/useIsAdmin";
@@ -70,10 +71,10 @@ function AdminTools() {
     queryClient.invalidateQueries({ queryKey: ["financial-tools"] });
   }
 
-  if (checking) return <PageShell title="Manage Financial Tools" intro="Checking access…" />;
+  if (checking) return <PageShell adminNav heading={<AdminPageTitle accent="Financial Tools" />} intro="Checking access…" />;
   if (!isAdmin) {
     return (
-      <PageShell title="Manage Financial Tools" intro="This area is for site administrators only.">
+      <PageShell adminNav heading={<AdminPageTitle accent="Financial Tools" />} intro="This area is for site administrators only.">
         <Link to="/account" className="mt-6 inline-block font-bold text-sky-blue">
           ← Back to My Account
         </Link>
@@ -135,7 +136,7 @@ function AdminTools() {
 
   return (
     <PageShell
-      title="Manage Financial Tools"
+      adminNav heading={<AdminPageTitle accent="Financial Tools" />}
       intro="Upload, replace, publish, or remove the PDFs shown on the Tools tab."
     >
       <div className="mt-8 flex flex-wrap items-center gap-3">

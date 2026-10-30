@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Eye, EyeOff } from "lucide-react";
 
-import { PageShell } from "@/components/site/PageShell";
+import { Footer } from "@/components/site/Footer";
+import { Header } from "@/components/site/Header";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -31,6 +33,7 @@ function AuthPage() {
   const [mode, setMode] = useState<"sign-in" | "sign-up">("sign-in");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [displayName, setDisplayName] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "error" | "confirm">("idle");
   const [message, setMessage] = useState("");
@@ -78,19 +81,22 @@ function AuthPage() {
   const sending = status === "sending";
 
   const inputClass =
-    "h-14 w-full rounded border-2 border-[#bbc8d4] bg-white px-4 text-base font-semibold text-navy-blue placeholder:text-[#bbc8d4] focus:outline-none focus:ring-2 focus:ring-sky-blue";
+    "h-14 w-full rounded border-2 border-white bg-white px-4 text-base font-semibold text-navy-blue placeholder:text-[#bbc8d4] focus:outline-none focus:ring-2 focus:ring-white";
 
   return (
-    <PageShell
-      title={mode === "sign-in" ? "Welcome back" : "Create your account"}
-      intro={
-        mode === "sign-in"
-          ? "Sign in to access your Build Financial Wellness account."
-          : "Join Build Financial Wellness to start your journey."
-      }
-    >
-      <section className="mx-auto flex w-full max-w-[520px] flex-col">
-        <form onSubmit={onSubmit} className="mt-10 flex flex-col gap-4">
+    <div className="flex min-h-screen flex-col bg-slate-50 font-cabin">
+      <Header />
+      <main className="flex flex-1 items-center justify-center px-5 py-14 lg:py-[85px]">
+        <section className="w-full max-w-[520px] rounded-[10px] bg-sky-blue px-8 py-10 text-white shadow-big-shadow lg:px-12 lg:py-12">
+          <h1 className="text-[2.25rem] font-normal leading-tight lg:text-5xl">
+            {mode === "sign-in" ? "Welcome back" : "Create your account"}
+          </h1>
+          <p className="mt-4 text-lg">
+            {mode === "sign-in"
+              ? "Sign in to access your Build Financial Wellness account."
+              : "Join Build Financial Wellness to start your journey."}
+          </p>
+          <form onSubmit={onSubmit} className="mt-8 flex flex-col gap-4">
           {mode === "sign-up" ? (
             <div>
               <label className="sr-only" htmlFor="auth-name">
@@ -120,20 +126,30 @@ function AuthPage() {
               className={inputClass}
             />
           </div>
-          <div>
+          <div className="relative">
             <label className="sr-only" htmlFor="auth-password">
               Password
             </label>
             <input
               id="auth-password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               required
               minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className={inputClass}
+              className={`${inputClass} pr-12`}
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword((visible) => !visible)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              aria-pressed={showPassword}
+              aria-controls="auth-password"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-navy-blue transition hover:text-sage-green-sat50"
+            >
+              {showPassword ? <EyeOff className="size-5" aria-hidden="true" /> : <Eye className="size-5" aria-hidden="true" />}
+            </button>
           </div>
           <button
             type="submit"
@@ -144,8 +160,8 @@ function AuthPage() {
           </button>
           {message ? (
             <p
-              className={`text-center text-sm font-semibold ${
-                status === "error" ? "text-burnt-orange" : "text-sage-green-sat50"
+              className={`rounded bg-white px-3 py-2 text-center text-sm font-semibold ${
+                status === "error" ? "text-burnt-orange" : "text-navy-blue"
               }`}
             >
               {message}
@@ -160,13 +176,15 @@ function AuthPage() {
             setMessage("");
             setStatus("idle");
           }}
-          className="mt-6 text-center text-sm font-bold text-sky-blue transition hover:text-navy-blue"
+          className="mt-6 w-full text-center text-sm font-bold text-white underline-offset-2 transition hover:underline"
         >
           {mode === "sign-in"
             ? "New here? Create an account"
             : "Already have an account? Sign in"}
         </button>
-      </section>
-    </PageShell>
+        </section>
+      </main>
+      <Footer />
+    </div>
   );
 }

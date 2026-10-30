@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { pageTitleAccentClass, pageTitleClass } from "@/components/site/page-title";
 
 const title = "Privacy Policy & Terms of Use — Build Financial Wellness";
 const description =
@@ -78,8 +79,8 @@ function PrivacyTerms() {
         <div className="mx-auto w-full max-w-[1160px]">
           <section id="privacy-policy" className="scroll-mt-[110px]">
             <p className="text-lg font-semibold text-navy-blue">Build Financial Wellness, LLC</p>
-            <h1 className="mt-2 text-3xl leading-tight text-navy-blue sm:text-4xl lg:text-5xl">
-              Privacy Policy
+            <h1 className={`mt-2 ${pageTitleClass}`}>
+              <span className={pageTitleAccentClass}>Privacy</span> Policy
             </h1>
             <p className="mt-3 text-base font-semibold text-[#6d7d8b]">
               Effective Date: August 1, 2025
@@ -204,8 +205,8 @@ function PrivacyTerms() {
           <hr className="my-14 border-light-gray" />
 
           <section id="terms-of-use" className="scroll-mt-[110px]">
-            <h2 className="text-3xl leading-tight text-navy-blue sm:text-4xl lg:text-5xl">
-              Terms of Use Policy
+            <h2 className={pageTitleClass}>
+              <span className={pageTitleAccentClass}>Terms</span> of Use Policy
             </h2>
             <p className="mt-3 text-base font-semibold text-[#6d7d8b]">
               Effective Date: August 1, 2025

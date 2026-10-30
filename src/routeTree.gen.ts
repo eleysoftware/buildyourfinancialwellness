@@ -19,6 +19,7 @@ import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 import { Route as NewslettersIndexRouteImport } from './routes/newsletters.index'
 import { Route as NewslettersSlugRouteImport } from './routes/newsletters.$slug'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminKitRouteImport } from './routes/_authenticated/admin.kit'
 import { Route as AuthenticatedAdminNewslettersRouteImport } from './routes/_authenticated/admin.newsletters'
 import { Route as AuthenticatedAdminToolsRouteImport } from './routes/_authenticated/admin.tools'
@@ -72,6 +73,11 @@ const NewslettersSlugRoute = NewslettersSlugRouteImport.update({
   path: '/newsletters/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAdminKitRoute = AuthenticatedAdminKitRouteImport.update({
   id: '/admin/kit',
   path: '/admin/kit',
@@ -102,6 +108,7 @@ export interface FileRoutesByFullPath {
   '/admin/kit': typeof AuthenticatedAdminKitRoute
   '/admin/newsletters': typeof AuthenticatedAdminNewslettersRoute
   '/admin/tools': typeof AuthenticatedAdminToolsRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/admin/kit': typeof AuthenticatedAdminKitRoute
   '/admin/newsletters': typeof AuthenticatedAdminNewslettersRoute
   '/admin/tools': typeof AuthenticatedAdminToolsRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/kit': typeof AuthenticatedAdminKitRoute
   '/_authenticated/admin/newsletters': typeof AuthenticatedAdminNewslettersRoute
   '/_authenticated/admin/tools': typeof AuthenticatedAdminToolsRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -148,6 +157,7 @@ export interface FileRouteTypes {
     | '/admin/kit'
     | '/admin/newsletters'
     | '/admin/tools'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
     | '/admin/kit'
     | '/admin/newsletters'
     | '/admin/tools'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -177,6 +188,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/kit'
     | '/_authenticated/admin/newsletters'
     | '/_authenticated/admin/tools'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -263,6 +275,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewslettersSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/kit': {
       id: '/_authenticated/admin/kit'
       path: '/admin/kit'
@@ -292,6 +311,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminKitRoute: typeof AuthenticatedAdminKitRoute
   AuthenticatedAdminNewslettersRoute: typeof AuthenticatedAdminNewslettersRoute
   AuthenticatedAdminToolsRoute: typeof AuthenticatedAdminToolsRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -299,6 +319,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminKitRoute: AuthenticatedAdminKitRoute,
   AuthenticatedAdminNewslettersRoute: AuthenticatedAdminNewslettersRoute,
   AuthenticatedAdminToolsRoute: AuthenticatedAdminToolsRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

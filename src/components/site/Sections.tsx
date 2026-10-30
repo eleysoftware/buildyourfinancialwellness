@@ -17,6 +17,7 @@ import avatar4 from "@/assets/ellipse.png";
 import avatar5 from "@/assets/ellipse-2.png";
 import avatar6 from "@/assets/kj-testimonial.png";
 
+import { pageTitleAccentClass, pageTitleClass } from "./page-title";
 import { DotGrid } from "./DotGrid";
 import { SavingsResetKitForm } from "./SavingsResetKitForm";
 import { SubscribeForm } from "./SubscribeForm";
@@ -63,7 +64,7 @@ export function Hero() {
 export function Overview() {
   return (
     <section id="overview" className="scroll-mt-24 bg-slate-50 py-20 lg:py-28">
-      <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-5 lg:grid-cols-[788px_1fr] lg:gap-16 lg:px-0">
+      <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-5 lg:grid-cols-[minmax(0,745px)_minmax(34rem,1fr)] lg:gap-6 lg:px-0">
         <div className="relative">
           <DotGrid color="orange" rows={10} cols={10} className="absolute -top-10 left-8 hidden lg:grid" />
           <img
@@ -79,11 +80,11 @@ export function Overview() {
           />
         </div>
 
-        <div className="px-0 lg:pr-[150px]">
-          <h2 className="text-[22px] font-bold leading-tight text-navy-blue sm:text-3xl lg:text-[38px] lg:leading-[0.94]">
-            <span className="block whitespace-nowrap"><span className="text-sky-blue">Build</span> Habits.</span>
-            <span className="block whitespace-nowrap"><span className="text-sky-blue">Build</span> Confidence.</span>
-            <span className="block whitespace-nowrap"><span className="text-sky-blue">Build</span> Financial Wellness.</span>
+        <div className="min-w-0 px-0 lg:pr-6">
+          <h2 className={`${pageTitleClass} max-lg:text-[clamp(1.15rem,calc((100vw-2.5rem)/10.5),2.25rem)]`}>
+            <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Habits.</span>
+            <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Confidence.</span>
+            <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Financial Wellness.</span>
           </h2>
           <p className="mt-8 text-lg leading-loose text-navy-blue-sat50 lg:text-xl">
             Financial wellness goes beyond the numbers. It's about shifting mindsets, creating
@@ -149,8 +150,8 @@ export function Services() {
   return (
     <section id="services" className="scroll-mt-24 bg-slate-50 pb-24 pt-10 lg:pb-32">
       <div className="mx-auto max-w-[1200px] px-5">
-        <h2 className="text-3xl font-bold text-navy-blue lg:text-5xl">
-          Support for Every Step of <span className="text-sky-blue">Your</span> Journey.
+        <h2 className={pageTitleClass}>
+          Support for Every Step of <span className={pageTitleAccentClass}>Your</span> Journey.
         </h2>
 
         <div className="mt-12 grid auto-rows-fr gap-x-8 gap-y-12 md:grid-cols-2">
@@ -214,8 +215,8 @@ export function Contact() {
     <section id="contact" className="scroll-mt-24 bg-slate-50 py-20 lg:py-28">
       <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 lg:grid-cols-2">
         <div>
-          <h2 className="text-3xl font-bold text-navy-blue lg:text-5xl">
-            Get in <span className="text-sky-blue">Touch</span>.
+          <h2 className={pageTitleClass}>
+            Get in <span className={pageTitleAccentClass}>Touch</span>.
           </h2>
           <ul className="mt-10 space-y-6">
             {contactDetails.map((detail) => (
@@ -346,9 +347,9 @@ export function Testimonials() {
   return (
     <section id="testimonials" className="scroll-mt-24 bg-slate-50 pb-24 lg:pb-32">
       <div className="mx-auto max-w-[1200px] px-5">
-        <h2 className="text-3xl font-bold text-navy-blue lg:text-5xl">
+        <h2 className={pageTitleClass}>
           What People Are Saying About{" "}
-          <span className="text-sky-blue">Build Financial Wellness</span>.
+          <span className={pageTitleAccentClass}>Build Financial Wellness</span>.
         </h2>
 
         <div className="relative mt-12">

@@ -1,6 +1,7 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { AdminNav } from "@/components/site/AdminNav";
 import { PageShell } from "@/components/site/PageShell";
 import { supabase } from "@/integrations/supabase/client";
 import { useIsAdmin } from "@/hooks/useIsAdmin";
@@ -86,15 +87,7 @@ function AccountPage() {
         {isAdmin ? (
           <div className="mt-6 rounded bg-white p-6 shadow-big-shadow lg:p-8">
             <h2 className="text-xl font-bold text-navy-blue">Website administration</h2>
-            <Link to="/admin/newsletters" className="mt-3 block font-bold text-sky-blue hover:text-navy-blue">
-              Manage newsletters →
-            </Link>
-            <Link to="/admin/tools" className="mt-3 block font-bold text-sky-blue hover:text-navy-blue">
-              Manage financial tools →
-            </Link>
-            <Link to="/admin/kit" className="mt-3 block font-bold text-sky-blue hover:text-navy-blue">
-              Manage Savings Reset Kit →
-            </Link>
+            <AdminNav className="mt-4" />
           </div>
         ) : null}
 

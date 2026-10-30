@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { pageTitleAccentClass, pageTitleClass } from "@/components/site/page-title";
 import storyImage from "@/assets/our-story-image.png";
 
 const title = "The BFW Story — Build Financial Wellness";
@@ -34,8 +35,8 @@ function OurStory() {
           {/* Story content */}
           <div className="order-2 px-5 pb-16 pt-10 lg:order-1 lg:px-[60px] lg:pb-28 lg:pt-[70px] 2xl:px-[140px]">
 
-            <h1 className="text-[2.25rem] font-normal leading-tight text-navy-blue lg:text-5xl">
-              The <em className="not-italic text-sky-blue">BFW</em> Story
+            <h1 className={pageTitleClass}>
+              The <span className={pageTitleAccentClass}>BFW</span> Story
             </h1>
 
             <div className="mt-10 max-w-[651px] space-y-7">

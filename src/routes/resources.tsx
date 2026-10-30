@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { NewsletterList } from "@/components/site/NewsletterList";
 import { PageShell } from "@/components/site/PageShell";
+import { pageTitleAccentClass, pageTitleClass } from "@/components/site/page-title";
 import { ToolList } from "@/components/site/ToolList";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -41,7 +42,15 @@ function Resources() {
   }
 
   return (
-    <PageShell title="Resource Library" intro={description}>
+    <PageShell
+      padding="faq"
+      heading={
+        <h1 className={pageTitleClass}>
+          <span className={pageTitleAccentClass}>Resource</span> Library
+        </h1>
+      }
+      intro={description}
+    >
       <Tabs value={active} onValueChange={selectTab} className="mt-10">
         <TabsList className="h-auto w-full justify-start gap-1 bg-white p-1 shadow-big-shadow sm:w-auto">
           <TabsTrigger value="tools" className={tabTrigger}>

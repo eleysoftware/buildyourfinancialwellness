@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { AdminPageTitle } from "@/components/site/AdminNav";
 import { PageShell } from "@/components/site/PageShell";
 import { supabase } from "@/integrations/supabase/client";
 import { useIsAdmin } from "@/hooks/useIsAdmin";
@@ -56,10 +57,10 @@ function AdminKit() {
     queryClient.invalidateQueries({ queryKey: ["savings-reset-kit"] });
   }
 
-  if (checking) return <PageShell title="Manage Savings Reset Kit" intro="Checking access…" />;
+  if (checking) return <PageShell adminNav heading={<AdminPageTitle accent="Savings Reset Kit" />} intro="Checking access…" />;
   if (!isAdmin) {
     return (
-      <PageShell title="Manage Savings Reset Kit" intro="This area is for site administrators only.">
+      <PageShell adminNav heading={<AdminPageTitle accent="Savings Reset Kit" />} intro="This area is for site administrators only.">
         <Link to="/account" className="mt-6 inline-block font-bold text-sky-blue">
           ← Back to My Account
         </Link>
@@ -101,7 +102,7 @@ function AdminKit() {
 
   return (
     <PageShell
-      title="Manage Savings Reset Kit"
+      adminNav heading={<AdminPageTitle accent="Savings Reset Kit" />}
       intro="Replace the PDF visitors receive after they submit the contact form."
     >
       <div className="mt-8">

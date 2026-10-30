@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { AdminPageTitle } from "@/components/site/AdminNav";
 import { PageShell } from "@/components/site/PageShell";
 import { supabase } from "@/integrations/supabase/client";
 import { useIsAdmin } from "@/hooks/useIsAdmin";
@@ -80,10 +81,10 @@ function AdminNewsletters() {
     queryClient.invalidateQueries({ queryKey: ["newsletters"] });
   }
 
-  if (checking) return <PageShell title="Manage Newsletters" intro="Checking access…" />;
+  if (checking) return <PageShell adminNav heading={<AdminPageTitle accent="Newsletters" />} intro="Checking access…" />;
   if (!isAdmin) {
     return (
-      <PageShell title="Manage Newsletters" intro="This area is for site administrators only.">
+      <PageShell adminNav heading={<AdminPageTitle accent="Newsletters" />} intro="This area is for site administrators only.">
         <Link to="/account" className="mt-6 inline-block font-bold text-sky-blue">
           ← Back to My Account
         </Link>
@@ -135,7 +136,7 @@ function AdminNewsletters() {
   }
 
   return (
-    <PageShell title="Manage Newsletters" intro="Create, edit, publish, or remove newsletters shown on the Newsletters page.">
+    <PageShell adminNav heading={<AdminPageTitle accent="Newsletters" />} intro="Create, edit, publish, or remove newsletters shown on the Newsletters page.">
       <div className="mt-8 flex flex-wrap items-center gap-3">
         <button className={`${btn} bg-navy-blue text-white hover:bg-[#57ae83]`} onClick={() => setDraft({ ...emptyDraft })}>
           + New newsletter

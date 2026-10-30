@@ -29,9 +29,9 @@ export function Header() {
   ];
 
   const submenuItemClass =
-    "block w-full px-4 py-2 text-left text-sm font-bold text-navy-blue hover:bg-color-white";
+    "block w-full px-4 py-2 text-left text-sm font-bold text-navy-blue transition-colors hover:text-sage-green-sat50";
   const nestedItemClass =
-    "block w-full py-2 pl-8 pr-4 text-left text-sm font-bold text-navy-blue hover:bg-color-white";
+    "block w-full py-2 pl-8 pr-4 text-left text-sm font-bold text-navy-blue transition-colors hover:text-sage-green-sat50";
 
   function prefersReducedMotion() {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -68,7 +68,7 @@ export function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-7 xl:flex">
+        <nav className="hidden translate-y-[9px] items-center gap-7 xl:flex">
           {sectionLinks.map((item) => (
             <button key={item.id} className={linkClass} onClick={() => goToSection(item.id)}>
               {item.label}
@@ -93,7 +93,7 @@ export function Header() {
               Resources
               <span
                 aria-hidden="true"
-                className={`inline-flex size-3.5 shrink-0 origin-center items-center justify-center text-sage-green-sat50 transition-transform duration-300 motion-reduce:transition-none ${
+                className={`inline-flex size-3.5 shrink-0 origin-center items-center justify-center text-sage-green-sat50 transition-transform duration-200 motion-reduce:transition-none ${
                   supportOpen ? "rotate-180" : "rotate-0"
                 }`}
                 onTransitionEnd={(event) => {
@@ -115,11 +115,11 @@ export function Header() {
                 <Link to="/resources" className={submenuItemClass}>
                   Resource Library
                 </Link>
-                <Link to="/resources" search={{ tab: "newsletters" }} className={nestedItemClass}>
-                  Newsletter
-                </Link>
                 <Link to="/resources" search={{ tab: "tools" }} className={nestedItemClass}>
                   Tools
+                </Link>
+                <Link to="/resources" search={{ tab: "newsletters" }} className={nestedItemClass}>
+                  Newsletter
                 </Link>
                 <button
                   className={submenuItemClass}
@@ -192,19 +192,19 @@ export function Header() {
           </Link>
           <Link
             to="/resources"
-            search={{ tab: "newsletters" }}
-            className={`${linkClass} py-2 pl-4`}
-            onClick={() => setMobileOpen(false)}
-          >
-            Newsletter
-          </Link>
-          <Link
-            to="/resources"
             search={{ tab: "tools" }}
             className={`${linkClass} py-2 pl-4`}
             onClick={() => setMobileOpen(false)}
           >
             Tools
+          </Link>
+          <Link
+            to="/resources"
+            search={{ tab: "newsletters" }}
+            className={`${linkClass} py-2 pl-4`}
+            onClick={() => setMobileOpen(false)}
+          >
+            Newsletter
           </Link>
           <button
             className={`${linkClass} py-2 text-left`}

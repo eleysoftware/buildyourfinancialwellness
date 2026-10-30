@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { pageTitleAccentClass, pageTitleClass } from "@/components/site/page-title";
 
 const title = "FAQ — Build Financial Wellness";
 const description =
@@ -82,8 +83,8 @@ function Faq() {
       <Header />
       <main className="flex-1 px-5 py-14 lg:px-[60px] lg:py-[85px] 2xl:px-[140px]">
         <div className="mx-auto w-full max-w-[1160px]">
-          <h1 className="text-3xl leading-tight text-navy-blue sm:text-4xl lg:text-5xl">
-            Frequently Asked Questions
+          <h1 className={pageTitleClass}>
+            Frequently Asked <span className={pageTitleAccentClass}>Questions</span>
           </h1>
 
           <div className="mt-10 space-y-3">
