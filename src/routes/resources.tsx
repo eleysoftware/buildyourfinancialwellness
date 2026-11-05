@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 
 import { NewsletterList } from "@/components/site/NewsletterList";
@@ -13,14 +13,6 @@ const description =
 
 const tabTrigger =
   "rounded-md px-5 py-2 text-base font-bold text-navy-blue data-[state=active]:bg-navy-blue data-[state=active]:text-white data-[state=active]:shadow-none";
-
-function BackToResources() {
-  return (
-    <Link to="/resources" className="mt-8 inline-block text-sm font-bold text-sky-blue hover:text-navy-blue">
-      ← Back to Resources
-    </Link>
-  );
-}
 
 export const Route = createFileRoute("/resources")({
   validateSearch: z.object({
@@ -71,11 +63,9 @@ function Resources() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="tools">
-          <BackToResources />
           <ToolList />
         </TabsContent>
         <TabsContent value="newsletters">
-          <BackToResources />
           <NewsletterList page={page} to="/resources" />
         </TabsContent>
       </Tabs>

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { z } from "zod";
 
 import { Header } from "@/components/site/Header";
@@ -31,7 +31,10 @@ function NewslettersPage() {
     <div className="flex min-h-screen flex-col bg-slate-50 font-cabin">
       <Header />
       <main className="mx-auto w-full max-w-[1200px] flex-1 px-5 py-20 lg:py-[88px]">
-        <h1 className="text-4xl font-medium text-navy-blue lg:text-5xl">Newsletters</h1>
+        <Link to="/resources" className="text-sm font-bold text-sky-blue hover:text-navy-blue">
+          ← Back to Resources
+        </Link>
+        <h1 className="mt-8 text-4xl font-medium text-navy-blue lg:text-5xl">Newsletters</h1>
         <p className="mt-4 text-xl text-navy-blue-sat50 lg:text-[32px] lg:leading-tight">
           Explore practical resources that help you better understand your finances and take your next step with confidence.
         </p>
