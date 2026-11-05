@@ -4,8 +4,8 @@ import { Calendar, Check, ClipboardList, Route, Users } from "lucide-react";
 
 import heroImage from "@/assets/bfw-hero-image.webp";
 import overviewImage from "@/assets/section-services-image-jpg.png";
-import individualsBanner from "@/assets/service-individuals-banner.png";
-import employersBanner from "@/assets/service-employers-banner.png";
+import individualsBanner from "@/assets/service-individuals-banner.jpg";
+import employersBanner from "@/assets/service-employers-banner.jpg";
 import iconLocation from "@/assets/iconcommunicationlocationon24px.png";
 import iconCall from "@/assets/iconcommunicationcall24px.png";
 import iconEmail from "@/assets/iconcommunicationemail24px.png";
@@ -18,7 +18,7 @@ import avatar4 from "@/assets/ellipse.png";
 import avatar5 from "@/assets/ellipse-2.png";
 import avatar6 from "@/assets/kj-testimonial.png";
 
-import { pageTitleAccentClass, pageTitleClass } from "./page-title";
+import { pageTitleAccentClass, pageTitleClass, pageTitlePeriodClass } from "./page-title";
 import { DotGrid } from "./DotGrid";
 import { SavingsResetKitForm } from "./SavingsResetKitForm";
 import { SubscribeForm } from "./SubscribeForm";
@@ -84,9 +84,9 @@ export function Overview() {
 
         <div className="min-w-0 px-0 lg:pr-6">
           <h2 id="overview" className={`${pageTitleClass} scroll-mt-28 max-lg:text-[clamp(1.15rem,calc((100vw-2.5rem)/10.5),2.25rem)]`}>
-            <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Habits.</span>
-            <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Confidence.</span>
-            <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Financial Wellness.</span>
+            <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Habits<span className={pageTitlePeriodClass}>.</span></span>
+            <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Confidence<span className={pageTitlePeriodClass}>.</span></span>
+            <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Financial Wellness<span className={pageTitlePeriodClass}>.</span></span>
           </h2>
           <p className="mt-8 text-lg leading-loose text-navy-blue-sat50 lg:text-xl">
             Financial wellness goes beyond the numbers. It's about shifting mindsets, creating
@@ -160,7 +160,7 @@ export function Services() {
     <section className="bg-slate-50 pb-24 pt-10 lg:pb-32">
       <div className="mx-auto max-w-[1200px] px-5">
         <h2 id="services" className={`${pageTitleClass} scroll-mt-28`}>
-          Support for Every Step of <span className={pageTitleAccentClass}>Your Journey</span>.
+          Support for Every Step of <span className={pageTitleAccentClass}>Your</span> Journey<span className={pageTitlePeriodClass}>.</span>
         </h2>
 
         <div className="mt-12 grid items-stretch gap-8 lg:grid-cols-2">
@@ -268,7 +268,7 @@ export function Contact() {
       <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 lg:grid-cols-2">
         <div>
           <h2 id="contact" className={`${pageTitleClass} scroll-mt-28`}>
-            Get in <span className={pageTitleAccentClass}>Touch</span>.
+            Get in <span className={pageTitleAccentClass}>Touch</span><span className={pageTitlePeriodClass}>.</span>
           </h2>
           <ul className="mt-10 space-y-6">
             {contactDetails.map((detail) => (
@@ -401,7 +401,7 @@ export function Testimonials() {
       <div className="mx-auto max-w-[1200px] px-5">
         <h2 className={pageTitleClass}>
           What People Are Saying About{" "}
-          <span className={pageTitleAccentClass}>Build Financial Wellness</span>.
+          <span className={pageTitleAccentClass}>Build Financial Wellness</span><span className={pageTitlePeriodClass}>.</span>
         </h2>
 
         <div className="relative mt-12">

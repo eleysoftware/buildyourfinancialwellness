@@ -93,7 +93,7 @@ function AuthPage() {
           </h1>
           <p className="mt-4 text-lg">
             {mode === "sign-in"
-              ? "Sign in to access your Build Financial Wellness account."
+              ? "Sign in to access your Employee Resource Library account."
               : "Join Build Financial Wellness to start your journey."}
           </p>
           <form onSubmit={onSubmit} className="mt-8 flex flex-col gap-4">

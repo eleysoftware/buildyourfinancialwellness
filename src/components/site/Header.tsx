@@ -164,7 +164,7 @@ export function Header() {
             to={user ? "/account" : "/auth"}
             className="inline-flex h-[38px] items-center rounded-[80px] bg-navy-blue px-4 text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:bg-[#57ae83]"
           >
-            {user ? "My Account" : "Client Login"}
+            {user ? "My Account" : "Employee Login"}
           </Link>
         </nav>
 
@@ -278,7 +278,7 @@ export function Header() {
             onClick={() => setMobileOpen(false)}
             className="mt-3 inline-flex h-[44px] items-center justify-center rounded-[80px] bg-navy-blue px-4 text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)]"
           >
-            {user ? "My Account" : "Client Login"}
+            {user ? "My Account" : "Employee Login"}
           </Link>
         </nav>
       ) : null}
