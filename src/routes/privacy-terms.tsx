@@ -58,10 +58,6 @@ function Contact() {
       </p>
       <p>
         Phone:{" "}
-        <a className="text-sky-blue underline" href="tel:18882250352">
-          1-888-225-0352
-        </a>
-        {" · "}
         <a className="text-sky-blue underline" href="tel:2602058206">
           260-205-8206
         </a>

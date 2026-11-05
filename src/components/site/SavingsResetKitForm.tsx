@@ -17,7 +17,7 @@ export function SavingsResetKitForm() {
       variant="newsletter"
       withFirstName
       submitLabel="Download"
-      successMessage="Thank you! Your Savings Reset Kit is downloading."
+      successMessage="Thank you! Your Savings Reset Kit is downloading. Save to your device and open in Adobe Acrobat (the free version works)"
       onSuccess={() => {
         if (kit.pdf_url) void downloadSavingsResetKit(kit.pdf_url);
       }}

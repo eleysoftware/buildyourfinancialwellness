@@ -11,6 +11,7 @@ export function PageShell({
   children,
   padding = "default",
   adminNav = false,
+  introWide = false,
 }: {
   title?: string;
   heading?: ReactNode;
@@ -18,6 +19,7 @@ export function PageShell({
   children?: ReactNode;
   padding?: "default" | "faq";
   adminNav?: boolean;
+  introWide?: boolean;
 }) {
   const mainPadding = padding === "faq" ? "py-14 lg:py-[85px]" : "py-20 lg:py-28";
   const adminNavDirection = useAdminNavDirection();
@@ -25,7 +27,7 @@ export function PageShell({
   const body = (
     <>
       {heading ?? <h1 className="text-3xl font-bold text-navy-blue lg:text-5xl">{title}</h1>}
-      <p className="mt-6 max-w-[680px] text-lg text-navy-blue-sat50 lg:text-xl">{intro}</p>
+      <p className={`mt-6 text-lg text-navy-blue-sat50 lg:text-xl ${introWide ? "" : "max-w-[680px]"}`}>{intro}</p>
       {children}
     </>
   );

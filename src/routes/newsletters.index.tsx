@@ -33,7 +33,7 @@ function NewslettersPage() {
       <main className="mx-auto w-full max-w-[1200px] flex-1 px-5 py-20 lg:py-[88px]">
         <h1 className="text-4xl font-medium text-navy-blue lg:text-5xl">Newsletters</h1>
         <p className="mt-4 text-xl text-navy-blue-sat50 lg:text-[32px] lg:leading-tight">
-          The latest articles and news on building financial wellness.
+          Explore practical resources that help you better understand your finances and take your next step with confidence.
         </p>
         <NewsletterList page={page} to="/newsletters" />
       </main>

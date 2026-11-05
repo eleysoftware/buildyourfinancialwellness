@@ -11,16 +11,28 @@ export function Header() {
   const [supportOpen, setSupportOpen] = useState(false);
   const [supportMenuVisible, setSupportMenuVisible] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
+  function scrollToTarget(id: string) {
+    const target = document.getElementById(id);
+    if (!target) return;
+    const header = document.querySelector("header");
+    const offset = (header?.getBoundingClientRect().height ?? 88) + 16;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+  }
+
   function goToSection(id: string) {
     if (pathname === "/") {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      navigate({ to: "/", hash: id });
+      scrollToTarget(id);
+      return;
     }
+    void navigate({ to: "/", hash: id }).then(() => {
+      window.setTimeout(() => scrollToTarget(id), 50);
+    });
   }
 
   const sectionLinks = [
@@ -60,7 +72,16 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b-[3px] border-[#3299e9] bg-white">
       <div className="mx-auto flex h-[85px] max-w-[1440px] items-center justify-between gap-6 px-5 lg:gap-10 lg:px-[60px] 2xl:px-[141px]">
-        <Link to="/" className="shrink-0">
+        <Link
+          to="/"
+          className="shrink-0"
+          onClick={(event) => {
+            if (pathname === "/") {
+              event.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        >
           <img
             src={logo}
             alt="Build Financial Wellness — our name is our mission"
@@ -184,53 +205,74 @@ export function Header() {
           >
             Testimonials
           </button>
-          <Link to="/faq" className={`${linkClass} py-2`} onClick={() => setMobileOpen(false)}>
-            FAQ
-          </Link>
-          <Link to="/resources" className={`${linkClass} py-2`} onClick={() => setMobileOpen(false)}>
-            Resource Library
-          </Link>
-          <Link
-            to="/resources"
-            search={{ tab: "tools" }}
-            className={`${linkClass} py-2 pl-4`}
-            onClick={() => setMobileOpen(false)}
-          >
-            Tools
-          </Link>
-          <Link
-            to="/resources"
-            search={{ tab: "newsletters" }}
-            className={`${linkClass} py-2 pl-4`}
-            onClick={() => setMobileOpen(false)}
-          >
-            Newsletter
-          </Link>
           <button
-            className={`${linkClass} py-2 text-left`}
-            onClick={() => {
-              setMobileOpen(false);
-              goToSection("contact");
-            }}
+            className={`${linkClass} flex items-center gap-1 py-2 text-left`}
+            aria-expanded={resourcesOpen}
+            onClick={() => setResourcesOpen((open) => !open)}
           >
-            Contact Us
+            Resources
+            <span
+              aria-hidden="true"
+              className={`inline-flex size-3.5 items-center justify-center text-sage-green-sat50 transition-transform ${
+                resourcesOpen ? "rotate-180" : ""
+              }`}
+            >
+              <svg viewBox="0 0 14 14" className="block size-3.5" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M2.5 8.5 7 4l4.5 4.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
           </button>
-          <Link
-            to="/privacy-terms"
-            hash="privacy-policy"
-            className={`${linkClass} py-2`}
-            onClick={() => setMobileOpen(false)}
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            to="/privacy-terms"
-            hash="terms-of-use"
-            className={`${linkClass} py-2`}
-            onClick={() => setMobileOpen(false)}
-          >
-            Terms of Use Policy
-          </Link>
+          {resourcesOpen ? (
+            <>
+              <Link to="/faq" className={`${linkClass} py-2 pl-4`} onClick={() => setMobileOpen(false)}>
+                FAQ
+              </Link>
+              <Link to="/resources" className={`${linkClass} py-2 pl-4`} onClick={() => setMobileOpen(false)}>
+                Resource Library
+              </Link>
+              <Link
+                to="/resources"
+                search={{ tab: "tools" }}
+                className={`${linkClass} py-2 pl-8`}
+                onClick={() => setMobileOpen(false)}
+              >
+                Tools
+              </Link>
+              <Link
+                to="/resources"
+                search={{ tab: "newsletters" }}
+                className={`${linkClass} py-2 pl-8`}
+                onClick={() => setMobileOpen(false)}
+              >
+                Newsletter
+              </Link>
+              <button
+                className={`${linkClass} py-2 pl-4 text-left`}
+                onClick={() => {
+                  setMobileOpen(false);
+                  goToSection("contact");
+                }}
+              >
+                Contact Us
+              </button>
+              <Link
+                to="/privacy-terms"
+                hash="privacy-policy"
+                className={`${linkClass} py-2 pl-4`}
+                onClick={() => setMobileOpen(false)}
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                to="/privacy-terms"
+                hash="terms-of-use"
+                className={`${linkClass} py-2 pl-4`}
+                onClick={() => setMobileOpen(false)}
+              >
+                Terms of Use Policy
+              </Link>
+            </>
+          ) : null}
           <Link
             to={user ? "/account" : "/auth"}
             onClick={() => setMobileOpen(false)}

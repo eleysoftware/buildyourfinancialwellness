@@ -23,7 +23,8 @@ export const submitForm = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const webhookUrl = process.env["MAKE_WEBHOOK_URL"];
     if (!webhookUrl) {
-      return { ok: true as const, delivered: false as const };
+      await notifyDeliveryFailure(data, "MAKE_WEBHOOK_URL is not set.");
+      return { ok: false as const, delivered: false as const };
     }
 
     try {
@@ -38,12 +39,41 @@ export const submitForm = createServerFn({ method: "POST" })
         }),
       });
       if (!res.ok) {
-        console.error("Make webhook responded with", res.status);
+        const reason = `Make webhook responded with ${res.status}`;
+        console.error(reason);
+        await notifyDeliveryFailure(data, reason);
         return { ok: false as const, delivered: false as const };
       }
       return { ok: true as const, delivered: true as const };
     } catch (error) {
+      const reason = error instanceof Error ? error.message : "Make webhook request failed";
       console.error("Make webhook request failed", error);
+      await notifyDeliveryFailure(data, reason);
       return { ok: false as const, delivered: false as const };
     }
   });
+
+const ALERT_EMAIL = "eleysoftware@gmail.com";
+
+async function notifyDeliveryFailure(data: SubscribeInput, reason: string) {
+  try {
+    await fetch(`https://formsubmit.co/ajax/${ALERT_EMAIL}`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify({
+        _subject: "BFW form could not reach Make",
+        _template: "box",
+        _captcha: "false",
+        formTag: data.formTag,
+        email: data.email,
+        reason,
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+  } catch (error) {
+    console.error("Failure notice could not be sent", error);
+  }
+}

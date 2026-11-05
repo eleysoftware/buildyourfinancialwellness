@@ -58,7 +58,7 @@ export function Footer() {
               Individuals / Households
             </a>
             <a href="/#services" className={itemClass}>
-              Employees / Organizations
+              Employers & Organizations
             </a>
           </div>
         </div>
@@ -69,14 +69,11 @@ export function Footer() {
             <a href="mailto:info@buildyourfinancialwellness.com" className={itemClass}>
               Email Build Financial Wellness
             </a>
-            <a href="tel:18882250352" className={itemClass}>
-              1-888-225-0352
-            </a>
             <a href="tel:2602058206" className={itemClass}>
               260-205-8206
             </a>
             <p className="text-xs leading-[1.7] text-white">
-              429 E Dupont Rd, Unit #2052
+              429 E Dupont Rd, Unit 2052
               <br />
               Fort Wayne, IN 46825
             </p>
@@ -84,9 +81,13 @@ export function Footer() {
         </div>
 
         <div className="min-w-0">
-          <p className={columnTitle}>Stay up to date</p>
+          <p className={columnTitle}>Stay Up To Date</p>
           <p className="mt-5 text-xs leading-[1.7] text-white">Subscribe to our newsletter</p>
-          <SubscribeForm formTag="SubscribeOnly" variant="footer" />
+          <SubscribeForm
+            formTag="SubscribeOnly"
+            variant="footer"
+            successMessage="Thank you! You're on our email list."
+          />
         </div>
       </div>
 

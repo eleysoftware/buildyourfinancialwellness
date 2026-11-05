@@ -1,10 +1,21 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { NewsletterMeta } from "@/components/site/NewsletterCard";
-import { FALLBACK_NEWSLETTERS, fetchNewsletterBySlug } from "@/lib/newsletters";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { FALLBACK_NEWSLETTERS, fetchNewsletterBySlug, type Newsletter } from "@/lib/newsletters";
 
 export const Route = createFileRoute("/newsletters/$slug")({
   head: ({ params }) => {
@@ -25,8 +36,35 @@ export const Route = createFileRoute("/newsletters/$slug")({
   component: NewsletterDetail,
 });
 
+async function downloadNewsletterPdf(newsletter: Newsletter) {
+  if (!newsletter.pdf_url) return;
+  const filename = decodeURIComponent(
+    newsletter.pdf_url.split("/").pop()?.split("?")[0] || `${newsletter.slug}.pdf`,
+  );
+  const link = document.createElement("a");
+  link.rel = "noopener";
+  link.download = filename;
+  try {
+    const response = await fetch(newsletter.pdf_url);
+    if (!response.ok) throw new Error("unavailable");
+    const blob = await response.blob();
+    const objectUrl = URL.createObjectURL(blob);
+    link.href = objectUrl;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+  } catch {
+    link.href = newsletter.pdf_url;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
+}
+
 function NewsletterDetail() {
   const { slug } = Route.useParams();
+  const [confirming, setConfirming] = useState(false);
   const { data: newsletter, isLoading } = useQuery({
     queryKey: ["newsletters", "slug", slug],
     queryFn: () => fetchNewsletterBySlug(slug),
@@ -73,14 +111,35 @@ function NewsletterDetail() {
                   >
                     Open PDF
                   </a>
-                  <a
-                    href={newsletter.pdf_url}
-                    download
+                  <button
+                    type="button"
+                    onClick={() => setConfirming(true)}
                     className="inline-flex h-[42px] items-center rounded-[80px] border-2 border-navy-blue px-5 text-base font-bold text-navy-blue transition hover:bg-navy-blue hover:text-white"
                   >
                     Download PDF
-                  </a>
+                  </button>
                 </div>
+                <AlertDialog open={confirming} onOpenChange={setConfirming}>
+                  <AlertDialogContent className="bg-white">
+                    <AlertDialogHeader>
+                      <AlertDialogTitle className="text-navy-blue">Download {newsletter.title}?</AlertDialogTitle>
+                      <AlertDialogDescription className="text-navy-blue-sat50">
+                        Save to your device. Then open in Adobe Acrobat. (The free version works)
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel className="rounded-[80px] border-2 border-navy-blue text-navy-blue">
+                        Cancel
+                      </AlertDialogCancel>
+                      <AlertDialogAction
+                        className="rounded-[80px] bg-navy-blue text-white hover:bg-[#57ae83]"
+                        onClick={() => void downloadNewsletterPdf(newsletter)}
+                      >
+                        Download
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
                 <object
                   data={newsletter.pdf_url}
                   type="application/pdf"

@@ -19,7 +19,7 @@ export function SubscribeForm({
   variant,
   withFirstName = false,
   submitLabel = "Submit",
-  successMessage = "Thank you! We'll be in touch shortly.",
+  successMessage = "Thank you! It's being delivered to your inbox.",
   onSuccess,
 }: SubscribeFormProps) {
   const send = useServerFn(submitForm);
@@ -54,7 +54,7 @@ export function SubscribeForm({
   if (variant === "hero") {
     return (
       <form onSubmit={onSubmit} className="w-full max-w-[564px]">
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
           <input type="hidden" name="formTag" value={formTag} />
           <label className="sr-only" htmlFor="hero-email">
             Email
@@ -66,19 +66,21 @@ export function SubscribeForm({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="h-14 w-full rounded border-2 border-[#bbc8d4] bg-white px-4 text-base font-semibold text-navy-blue placeholder:text-[#bbc8d4] focus:outline-none focus:ring-2 focus:ring-sky-blue sm:max-w-[366px]"
+            className="h-14 w-full min-w-0 rounded border-2 border-[#bbc8d4] bg-white px-4 text-base font-semibold text-navy-blue placeholder:text-[#bbc8d4] focus:outline-none focus:ring-2 focus:ring-sky-blue sm:max-w-[366px] sm:flex-1"
           />
-          <button
-            type="submit"
-            disabled={sending}
-            className="inline-flex min-h-[54px] max-w-full items-center justify-center whitespace-normal rounded-[80px] bg-burnt-orange px-8 py-3 text-center text-base font-bold leading-snug text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:brightness-110 disabled:opacity-70"
-          >
-            {sending ? "Sending…" : submitLabel}
-          </button>
+          <div className="flex w-full flex-col items-center sm:w-auto">
+            <button
+              type="submit"
+              disabled={sending}
+              className="inline-flex min-h-[54px] w-full max-w-full shrink-0 flex-col items-center justify-center rounded-[80px] bg-burnt-orange px-8 py-3 text-center text-base font-bold leading-snug text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:brightness-110 disabled:opacity-70 sm:w-auto sm:min-w-[13rem]"
+            >
+              {sending ? "Sending…" : <ButtonLines label={submitLabel} />}
+            </button>
+            {message ? (
+              <p className="mt-3 max-w-[18rem] text-center text-sm font-semibold text-white drop-shadow">{message}</p>
+            ) : null}
+          </div>
         </div>
-        {message ? (
-          <p className="mt-3 text-sm font-semibold text-white drop-shadow">{message}</p>
-        ) : null}
       </form>
     );
   }
@@ -87,7 +89,7 @@ export function SubscribeForm({
     return (
       <form onSubmit={onSubmit} className="mt-3 w-full max-w-[320px]">
         <input type="hidden" name="formTag" value={formTag} />
-        <div className="relative">
+        <div className="group relative">
           <label className="sr-only" htmlFor="footer-email">
             Email
           </label>
@@ -104,7 +106,7 @@ export function SubscribeForm({
             type="submit"
             disabled={sending}
             aria-label="Subscribe"
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-2 text-white/60 transition hover:text-white"
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-2 text-white transition group-focus-within:text-burnt-orange"
           >
             <svg width="24" height="16" viewBox="0 0 24 16" fill="none" aria-hidden="true">
               <path
@@ -172,4 +174,12 @@ export function SubscribeForm({
       {message ? <p className="mt-4 text-center text-sm text-white">{message}</p> : null}
     </form>
   );
+}
+
+function ButtonLines({ label }: { label: string }) {
+  return label.split("\n").map((line) => (
+    <span key={line} className="block whitespace-nowrap">
+      {line}
+    </span>
+  ));
 }

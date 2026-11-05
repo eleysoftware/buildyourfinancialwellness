@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { Calendar, Check, ClipboardList, Route, Users } from "lucide-react";
 
 import heroImage from "@/assets/bfw-hero-image.webp";
 import overviewImage from "@/assets/section-services-image-jpg.png";
-import thumb2 from "@/assets/service-thumbnail-2.png";
-import thumb3 from "@/assets/service-thumbnail-3.png";
+import individualsBanner from "@/assets/service-individuals-banner.png";
+import employersBanner from "@/assets/service-employers-banner.png";
 import iconLocation from "@/assets/iconcommunicationlocationon24px.png";
 import iconCall from "@/assets/iconcommunicationcall24px.png";
 import iconEmail from "@/assets/iconcommunicationemail24px.png";
@@ -52,7 +53,8 @@ export function Hero() {
             <SubscribeForm
               formTag="GetStarted"
               variant="hero"
-              submitLabel="Get Your Free Financial Check-In"
+              submitLabel={"Get Your Free\nFinancial Check-In"}
+              successMessage="Thank you! It's being delivered to your inbox."
             />
           </div>
         </div>
@@ -63,8 +65,8 @@ export function Hero() {
 
 export function Overview() {
   return (
-    <section id="overview" className="scroll-mt-24 bg-slate-50 py-20 lg:py-28">
-      <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-5 lg:grid-cols-[minmax(0,745px)_minmax(34rem,1fr)] lg:gap-6 lg:px-0">
+    <section className="bg-slate-50 py-20 lg:py-28">
+      <div className="mx-auto grid max-w-[1440px] items-start gap-12 px-5 lg:grid-cols-[minmax(0,745px)_minmax(34rem,1fr)] lg:gap-6 lg:px-0">
         <div className="relative">
           <DotGrid color="orange" rows={10} cols={10} className="absolute -top-10 left-8 hidden lg:grid" />
           <img
@@ -81,7 +83,7 @@ export function Overview() {
         </div>
 
         <div className="min-w-0 px-0 lg:pr-6">
-          <h2 className={`${pageTitleClass} max-lg:text-[clamp(1.15rem,calc((100vw-2.5rem)/10.5),2.25rem)]`}>
+          <h2 id="overview" className={`${pageTitleClass} scroll-mt-28 max-lg:text-[clamp(1.15rem,calc((100vw-2.5rem)/10.5),2.25rem)]`}>
             <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Habits.</span>
             <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Confidence.</span>
             <span className="block whitespace-nowrap"><span className={pageTitleAccentClass}>Build</span> Financial Wellness.</span>
@@ -90,7 +92,7 @@ export function Overview() {
             Financial wellness goes beyond the numbers. It's about shifting mindsets, creating
             healthy financial habits, and building confidence.
           </p>
-          <p className="mt-4 text-lg leading-loose text-navy-blue-sat50 lg:text-xl">Together we'll:</p>
+          <p className="mt-4 text-lg leading-loose text-navy-blue-sat50 lg:text-xl">Financial coaching can help:</p>
           <ul className="mt-6 space-y-4">
             {[
               "Clarify what's holding you back and highlight what's possible",
@@ -121,77 +123,128 @@ export function Overview() {
   );
 }
 
-const services = [
+const householdOfferings = [
   {
-    title: "Individuals / Households",
-    image: thumb2,
-    lead: "Start your journey to financial clarity and confidence.",
-    body: "This ongoing coaching experience helps you and your household shift your money mindset, build strong habits, and make confident financial decisions. Start with a FREE CONSULTATION to explore your goals and see if coaching is the right next step.",
-    meta: "Own your journey | Build a future | Stay empowered",
-    cta: "Book Your Free Consultation",
-    href: "https://partners.simply.coach/tamara-west/free-consultation-9",
-    ctaClass: "bg-navy-blue",
-    recommended: true,
+    title: "The Build Journey",
+    kicker: "Financial Coaching",
+    text: "Personalized 1:1 financial coaching designed to help you navigate decisions, build healthy habits, and move forward with greater clarity and confidence.",
+    icon: Route,
   },
   {
-    title: "Employees / Organizations",
-    image: thumb3,
-    lead: "Bring your people—we'll bring the financial wellness tools.",
-    body: "Whether it's a workplace, team, or community group, this session turns money talk into a practical, judgment-free experience. Spark connection, build confidence, and leave with tools your organization can actually use.",
-    meta: "Learn together | Support your team | Leave empowered",
-    cta: "Plan Your Information Session",
-    href: "https://partners.simply.coach/tamara-west/employer-information-session",
-    ctaClass: "bg-sky-blue",
-    recommended: false,
+    title: "The Budget Build",
+    kicker: "One-time budgeting session",
+    text: "A one-time budgeting session where we work together to create a realistic spending plan that reflects your priorities and goals.",
+    icon: ClipboardList,
+  },
+  {
+    title: "The Budget Mixer",
+    kicker: "Engaging group experience",
+    text: "A collaborative experience that helps participants learn practical budgeting skills in a supportive, low-pressure environment.",
+    icon: Users,
   },
 ];
 
+const employerOfferings = [
+  { title: "Financial Wellness Newsletter", text: "Monthly financial wellness tips and resources." },
+  { title: "Interactive Workshops", text: "Engaging workshops on timely money topics" },
+  { title: "Employee Coaching Access", text: "One-on-one coaching for employees" },
+  { title: "Financial Wellness Challenges", text: "Fun, team-based experiences that drive engagement" },
+  { title: "Customized Financial Wellness Support", text: "Solutions tailored to your organization's needs." },
+];
+
+const serviceButtonClass =
+  "mt-auto inline-flex h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-[80px] px-4 text-center text-base font-bold text-white no-underline shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition focus-visible:outline-2 focus-visible:outline-offset-2";
+
 export function Services() {
   return (
-    <section id="services" className="scroll-mt-24 bg-slate-50 pb-24 pt-10 lg:pb-32">
+    <section className="bg-slate-50 pb-24 pt-10 lg:pb-32">
       <div className="mx-auto max-w-[1200px] px-5">
-        <h2 className={pageTitleClass}>
-          Support for Every Step of <span className={pageTitleAccentClass}>Your</span> Journey.
+        <h2 id="services" className={`${pageTitleClass} scroll-mt-28`}>
+          Support for Every Step of <span className={pageTitleAccentClass}>Your Journey</span>.
         </h2>
 
-        <div className="mt-12 grid auto-rows-fr gap-x-8 gap-y-12 md:grid-cols-2">
-          {services.map((service) => (
-            <div
-              key={service.title}
-              className="relative flex h-full min-w-0 px-4 pb-4 pt-14"
-            >
-              {service.recommended ? (
-                <div className="absolute inset-0 rounded bg-dusty-rose-sat67 shadow-big-shadow">
-                  <p className="flex h-14 items-center justify-center text-center text-xl font-bold text-color-white lg:text-[27px]">
-                    RECOMMENDED
-                  </p>
-                </div>
-              ) : null}
-              <article className="relative z-10 flex h-full min-w-0 flex-col overflow-hidden rounded bg-white shadow-big-shadow transition hover:shadow-[8px_8px_8px_0px_rgb(50_153_233)]">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="h-[168px] w-full object-cover"
-                />
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="text-[22px] font-semibold text-navy-blue-sat85-bright79">
-                    {service.title}
-                  </h3>
-                  <p className="mt-4 text-sm font-semibold text-dusty-rose-sat67">{service.lead}</p>
-                  <p className="mt-4 text-sm leading-relaxed text-navy-blue-sat50">{service.body}</p>
-                  <p className="mt-auto pt-6 text-sm font-medium text-sky-blue">{service.meta}</p>
-                  <a
-                    href={service.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`mt-6 flex h-14 cursor-pointer items-center justify-center rounded-[80px] px-4 text-center text-base font-bold text-white no-underline shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:bg-[#57ae83] focus-visible:bg-[#57ae83] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#57ae83] ${service.ctaClass}`}
-                  >
-                    {service.cta}
-                  </a>
-                </div>
-              </article>
+        <div className="mt-12 grid items-stretch gap-8 lg:grid-cols-2">
+          <article className="flex h-full flex-col overflow-hidden rounded bg-white shadow-big-shadow">
+            <div className="relative h-44">
+              <img
+                src={individualsBanner}
+                alt="A couple and a parent reviewing plans together"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-navy-blue/45" />
+              <h3 className="absolute inset-x-5 bottom-4 text-2xl font-bold leading-tight text-white">
+                Support for Individuals and Households
+              </h3>
             </div>
-          ))}
+            <div className="flex flex-1 flex-col gap-5 p-6">
+              {householdOfferings.map((item) => (
+                <div key={item.title} className="flex gap-3">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-blue/15 text-navy-blue">
+                    <item.icon className="size-5" aria-hidden />
+                  </span>
+                  <div>
+                    <p className="font-bold text-navy-blue">{item.title}</p>
+                    <p className="text-sm font-semibold text-burnt-orange">{item.kicker}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-navy-blue-sat50">{item.text}</p>
+                  </div>
+                </div>
+              ))}
+              <a
+                href="https://partners.simply.coach/tamara-west/free-consultation-9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${serviceButtonClass} bg-navy-blue hover:bg-sky-blue focus-visible:bg-sky-blue focus-visible:outline-sky-blue`}
+              >
+                <Calendar className="size-4" aria-hidden />
+                Schedule a Free Consultation
+              </a>
+              <p className="text-center text-sm text-navy-blue-sat50">Let's find the right next step for you.</p>
+            </div>
+          </article>
+
+          <article className="flex h-full flex-col overflow-hidden rounded bg-white shadow-big-shadow">
+            <div className="relative h-44">
+              <img
+                src={employersBanner}
+                alt="Coworkers talking together in an office"
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-olive/45" />
+              <h3 className="absolute inset-x-5 bottom-4 text-2xl font-bold leading-tight text-white">
+                Support for Employers & Organizations
+              </h3>
+            </div>
+            <div className="flex flex-1 flex-col gap-5 p-6">
+              <p className="text-sm leading-relaxed text-navy-blue-sat50">
+                Financial wellness support that helps your team thrive - at work and at home.
+              </p>
+              <ul className="grid gap-4 sm:grid-cols-2">
+                {employerOfferings.map((item) => (
+                  <li key={item.title} className="flex gap-2">
+                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-burnt-orange text-white">
+                      <Check className="size-3" strokeWidth={3} aria-hidden />
+                    </span>
+                    <span>
+                      <span className="block text-sm font-bold text-navy-blue">{item.title}</span>
+                      <span className="mt-1 block text-sm leading-relaxed text-navy-blue-sat50">{item.text}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="https://partners.simply.coach/tamara-west/employer-information-session"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${serviceButtonClass} bg-olive hover:bg-[#57ae83] focus-visible:bg-[#57ae83] focus-visible:outline-[#57ae83]`}
+              >
+                <Calendar className="size-4" aria-hidden />
+                Schedule a Free Information Session
+              </a>
+              <p className="text-center text-sm text-navy-blue-sat50">
+                Let's build a program that works for your people and your organization.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -205,17 +258,16 @@ const contactDetails = [
     text: "info@buildyourfinancialwellness.com",
     href: "mailto:info@buildyourfinancialwellness.com",
   },
-  { icon: iconCall, text: "1 (888) 225-0352", href: "tel:18882250352" },
   { icon: iconCall, text: "260-205-8206", href: "tel:2602058206" },
-  { icon: iconLocation, text: "429 E Dupont Rd, Unit #2052\nFort Wayne, IN 46825", href: undefined },
+  { icon: iconLocation, text: "429 E Dupont Rd, Unit 2052\nFort Wayne, IN 46825", href: undefined },
 ];
 
 export function Contact() {
   return (
-    <section id="contact" className="scroll-mt-24 bg-slate-50 py-20 lg:py-28">
+    <section className="bg-slate-50 py-20 lg:py-28">
       <div className="mx-auto grid max-w-[1200px] items-center gap-14 px-5 lg:grid-cols-2">
         <div>
-          <h2 className={pageTitleClass}>
+          <h2 id="contact" className={`${pageTitleClass} scroll-mt-28`}>
             Get in <span className={pageTitleAccentClass}>Touch</span>.
           </h2>
           <ul className="mt-10 space-y-6">

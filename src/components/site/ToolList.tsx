@@ -65,7 +65,7 @@ export function ToolList() {
           <AlertDialogHeader>
             <AlertDialogTitle className="text-navy-blue">Download {pending?.title}?</AlertDialogTitle>
             <AlertDialogDescription className="text-navy-blue-sat50">
-              This file downloads to your device. No contact information is required.
+              Save to your device. Then open in Adobe Acrobat. (The free version works)
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
