@@ -162,6 +162,9 @@ export function Services() {
         <h2 id="services" className={`${pageTitleClass} scroll-mt-28`}>
           Support for Every Step of <span className={pageTitleAccentClass}>Your</span> Journey<span className={pageTitlePeriodClass}>.</span>
         </h2>
+        <p className="mt-8 text-lg leading-loose text-navy-blue-sat50 lg:text-xl">
+          Whether you’re taking control of your personal finances or looking to support your team, we’re here with the tools, guidance, and expertise you need.
+        </p>
 
         <div className="mt-12 grid items-stretch gap-8 lg:grid-cols-2">
           <article className="flex h-full flex-col overflow-hidden rounded bg-white shadow-big-shadow">
