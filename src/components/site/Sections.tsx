@@ -153,7 +153,7 @@ const employerOfferings = [
 ];
 
 const serviceButtonClass =
-  "mt-auto inline-flex h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-[80px] px-4 text-center text-base font-bold text-white no-underline shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition focus-visible:outline-2 focus-visible:outline-offset-2";
+  "mt-auto inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-[80px] px-4 text-center text-base font-bold text-white no-underline shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition focus-visible:outline-2 focus-visible:outline-offset-2";
 
 export function Services() {
   return (
@@ -163,19 +163,23 @@ export function Services() {
           Support for Every Step of <span className={pageTitleAccentClass}>Your</span> Journey<span className={pageTitlePeriodClass}>.</span>
         </h2>
         <p className="mt-8 text-lg leading-loose text-navy-blue-sat50 lg:text-xl">
-          Whether you’re taking control of your personal finances or looking to support your team, we’re here with the tools, guidance, and expertise you need.
+          Whether you’re taking control of your personal finances or looking to support your team,
+          <br />
+          we’re here with the tools, guidance, and expertise you need.
         </p>
 
         <div className="mt-12 grid items-stretch gap-8 lg:grid-cols-2">
           <article className="flex h-full flex-col overflow-hidden rounded bg-white shadow-big-shadow">
-            <div className="relative h-44">
+            <div className="relative h-44 md:h-72 lg:h-44">
               <img
                 src={individualsBanner}
                 alt="A family drawing together at a table"
                 className="h-full w-full object-cover object-[center_30%]"
               />
               <h3 className="absolute inset-x-5 bottom-4 text-2xl font-bold leading-tight text-white">
-                Support for Individuals and Households
+                <span className="box-decoration-clone rounded-md bg-slate-800/55 px-2 py-0.5">
+                  Support for Individuals and Households
+                </span>
               </h3>
             </div>
             <div className="flex flex-1 flex-col gap-5 p-6">
@@ -195,7 +199,7 @@ export function Services() {
                 href="https://partners.simply.coach/tamara-west/free-consultation-9"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${serviceButtonClass} bg-navy-blue hover:bg-sky-blue focus-visible:bg-sky-blue focus-visible:outline-sky-blue`}
+                className={`${serviceButtonClass} h-14 bg-navy-blue hover:bg-sky-blue focus-visible:bg-sky-blue focus-visible:outline-sky-blue`}
               >
                 <Calendar className="size-4" aria-hidden />
                 Schedule a Free Consultation
@@ -205,14 +209,16 @@ export function Services() {
           </article>
 
           <article className="flex h-full flex-col overflow-hidden rounded bg-white shadow-big-shadow">
-            <div className="relative h-44">
+            <div className="relative h-44 md:h-72 lg:h-44">
               <img
                 src={employersBanner}
                 alt="Coworkers talking together in an office"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-[center_28%]"
               />
               <h3 className="absolute inset-x-5 bottom-4 text-2xl font-bold leading-tight text-white">
-                Support for Employers & Organizations
+                <span className="box-decoration-clone rounded-md bg-slate-800/55 px-2 py-0.5">
+                  Support for Employers & Organizations
+                </span>
               </h3>
             </div>
             <div className="flex flex-1 flex-col gap-5 p-6">
@@ -236,10 +242,17 @@ export function Services() {
                 href="https://partners.simply.coach/tamara-west/employer-information-session"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${serviceButtonClass} bg-sage-green-sat50 hover:bg-[hsl(150_35%_40%)] focus-visible:bg-[hsl(150_35%_40%)] focus-visible:outline-[hsl(150_35%_40%)]`}
+                className={`${serviceButtonClass} relative h-auto min-h-14 py-2.5 sm:h-14 sm:py-0 bg-sage-green-sat50 hover:bg-[hsl(150_35%_40%)] focus-visible:bg-[hsl(150_35%_40%)] focus-visible:outline-[hsl(150_35%_40%)]`}
               >
-                <Calendar className="size-4" aria-hidden />
-                Schedule a Free Information Session
+                <Calendar className="size-4 shrink-0 max-sm:absolute max-sm:left-5" aria-hidden />
+                <span className="text-center leading-tight max-sm:w-full">
+                  <span className="sm:hidden">
+                    Schedule a
+                    <br />
+                    Free Information Session
+                  </span>
+                  <span className="hidden sm:inline">Schedule a Free Information Session</span>
+                </span>
               </a>
               <p className="text-center text-base text-navy-blue-sat50">
                 Let's build a program that works for your people and your organization.
