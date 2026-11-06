@@ -22,7 +22,6 @@
   /* Build Financial Wellness brand tokens (from Figma) */
   --color-navy-blue: var(--token-navy-blue);
   --color-sage-green-sat50: var(--token-sage-green-sat50);
-  --color-olive: var(--token-olive);
   --color-color-white: var(--token-color-white);
   --color-burnt-orange: var(--token-burnt-orange);
   --color-dusty-rose-sat67: var(--token-dusty-rose-sat67);
@@ -80,7 +79,6 @@
 :root {
   --token-navy-blue: hsl(217 58% 33%);
   --token-sage-green-sat50: hsl(150 35% 51%);
-  --token-olive: hsl(155 38% 26%);
   --token-color-white: hsl(216 33% 97%);
   --token-burnt-orange: hsl(21 81% 55%);
   --token-dusty-rose-sat67: hsl(330 50% 45%);

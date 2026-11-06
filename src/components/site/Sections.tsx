@@ -233,7 +233,7 @@ export function Services() {
                 href="https://partners.simply.coach/tamara-west/employer-information-session"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${serviceButtonClass} bg-olive hover:bg-[#57ae83] focus-visible:bg-[#57ae83] focus-visible:outline-[#57ae83]`}
+                className={`${serviceButtonClass} bg-[hsl(150_35%_40%)] hover:bg-sage-green-sat50 focus-visible:bg-sage-green-sat50 focus-visible:outline-sage-green-sat50`}
               >
                 <Calendar className="size-4" aria-hidden />
                 Schedule a Free Information Session
