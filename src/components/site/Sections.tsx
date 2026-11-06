@@ -171,8 +171,8 @@ export function Services() {
             <div className="relative h-44">
               <img
                 src={individualsBanner}
-                alt="A family reviewing a tablet together"
-                className="h-full w-full object-cover"
+                alt="A family drawing together at a table"
+                className="h-full w-full object-cover object-[center_30%]"
               />
               <h3 className="absolute inset-x-5 bottom-4 text-2xl font-bold leading-tight text-white">
                 Support for Individuals and Households
