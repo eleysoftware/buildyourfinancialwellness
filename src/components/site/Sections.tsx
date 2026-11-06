@@ -233,7 +233,7 @@ export function Services() {
                 href="https://partners.simply.coach/tamara-west/employer-information-session"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${serviceButtonClass} bg-[hsl(150_35%_40%)] hover:bg-sage-green-sat50 focus-visible:bg-sage-green-sat50 focus-visible:outline-sage-green-sat50`}
+                className={`${serviceButtonClass} bg-sage-green-sat50 hover:bg-[hsl(150_35%_40%)] focus-visible:bg-[hsl(150_35%_40%)] focus-visible:outline-[hsl(150_35%_40%)]`}
               >
                 <Calendar className="size-4" aria-hidden />
                 Schedule a Free Information Session
@@ -296,9 +296,9 @@ export function Contact() {
             cols={10}
             className="absolute -left-6 -top-10 hidden lg:grid"
           />
-          <div className="relative rounded-[10px] bg-sage-green-sat50 p-8 shadow-big-shadow lg:p-12">
+          <div className="relative z-10 rounded-[10px] bg-sage-green-sat50 p-8 shadow-big-shadow lg:p-12">
             <p className="text-center text-xl text-color-white lg:text-2xl">
-              <span className="font-bold">Download</span> your Savings Reset Kit
+              <span className="font-bold">Download</span> your Free Savings Reset Kit
             </p>
             <SavingsResetKitForm />
           </div>
