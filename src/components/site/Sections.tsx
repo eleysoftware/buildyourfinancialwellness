@@ -168,10 +168,9 @@ export function Services() {
             <div className="relative h-44">
               <img
                 src={individualsBanner}
-                alt="A couple and a parent reviewing plans together"
+                alt="A family reviewing a tablet together"
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-navy-blue/45" />
               <h3 className="absolute inset-x-5 bottom-4 text-2xl font-bold leading-tight text-white">
                 Support for Individuals and Households
               </h3>
@@ -184,8 +183,8 @@ export function Services() {
                   </span>
                   <div>
                     <p className="font-bold text-navy-blue">{item.title}</p>
-                    <p className="text-sm font-semibold text-burnt-orange">{item.kicker}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-navy-blue-sat50">{item.text}</p>
+                    <p className="text-base font-semibold text-burnt-orange">{item.kicker}</p>
+                    <p className="mt-1 text-base leading-relaxed text-navy-blue-sat50">{item.text}</p>
                   </div>
                 </div>
               ))}
@@ -198,7 +197,7 @@ export function Services() {
                 <Calendar className="size-4" aria-hidden />
                 Schedule a Free Consultation
               </a>
-              <p className="text-center text-sm text-navy-blue-sat50">Let's find the right next step for you.</p>
+              <p className="text-center text-base text-navy-blue-sat50">Let's find the right next step for you.</p>
             </div>
           </article>
 
@@ -209,13 +208,12 @@ export function Services() {
                 alt="Coworkers talking together in an office"
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-olive/45" />
               <h3 className="absolute inset-x-5 bottom-4 text-2xl font-bold leading-tight text-white">
                 Support for Employers & Organizations
               </h3>
             </div>
             <div className="flex flex-1 flex-col gap-5 p-6">
-              <p className="text-sm leading-relaxed text-navy-blue-sat50">
+              <p className="text-base leading-relaxed text-navy-blue-sat50">
                 Financial wellness support that helps your team thrive - at work and at home.
               </p>
               <ul className="grid gap-4 sm:grid-cols-2">
@@ -225,8 +223,8 @@ export function Services() {
                       <Check className="size-3" strokeWidth={3} aria-hidden />
                     </span>
                     <span>
-                      <span className="block text-sm font-bold text-navy-blue">{item.title}</span>
-                      <span className="mt-1 block text-sm leading-relaxed text-navy-blue-sat50">{item.text}</span>
+                      <span className="block text-base font-bold text-navy-blue">{item.title}</span>
+                      <span className="mt-1 block text-base leading-relaxed text-navy-blue-sat50">{item.text}</span>
                     </span>
                   </li>
                 ))}
@@ -240,7 +238,7 @@ export function Services() {
                 <Calendar className="size-4" aria-hidden />
                 Schedule a Free Information Session
               </a>
-              <p className="text-center text-sm text-navy-blue-sat50">
+              <p className="text-center text-base text-navy-blue-sat50">
                 Let's build a program that works for your people and your organization.
               </p>
             </div>
