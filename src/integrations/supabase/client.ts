@@ -31,6 +31,7 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
 if (typeof window !== "undefined") {
   supabase.auth.onAuthStateChange((event) => {
     if (event === "PASSWORD_RECOVERY") sessionStorage.setItem(RECOVERY_KEY, "1");
+    if (event === "SIGNED_OUT") sessionStorage.removeItem(RECOVERY_KEY);
   });
 }
 

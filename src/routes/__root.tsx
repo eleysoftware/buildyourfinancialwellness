@@ -12,7 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { supabase } from "../integrations/supabase/client";
+import { isPasswordRecovery, supabase } from "../integrations/supabase/client";
 
 function NotFoundComponent() {
   return (
@@ -128,9 +128,21 @@ function RootComponent() {
   const router = useRouter();
 
   useEffect(() => {
+    const openPasswordReset = () => {
+      if (router.state.location.pathname === "/auth") return;
+      const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+      const search = new URLSearchParams(window.location.search);
+      // Leave the email link's tokens in the address until Supabase stores the session.
+      if (hash.has("access_token") || hash.has("refresh_token") || search.has("code")) return;
+      void router.navigate({ to: "/auth", replace: true });
+    };
+
+    if (isPasswordRecovery()) openPasswordReset();
+
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") openPasswordReset();
       if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
       router.invalidate();
       if (event !== "SIGNED_OUT") queryClient.invalidateQueries();

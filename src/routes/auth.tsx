@@ -33,6 +33,9 @@ function alreadyRegistered(message: string | undefined) {
   return /already registered|already exists|already been registered/i.test(message ?? "");
 }
 
+const expiredResetMessage =
+  "This reset link is invalid or has expired. Enter your email to send a new one.";
+
 function AuthPage() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
@@ -56,14 +59,18 @@ function AuthPage() {
     return () => subscription.unsubscribe();
   }, []);
 
+  const view: AuthMode = isPasswordRecovery() ? "reset" : mode;
+  const resetLinkExpired = view === "reset" && !user;
+
   if (!checkedRecovery || loading) return null;
 
-  if (user && mode !== "reset") {
+  if (user && view !== "reset") {
     navigate({ to: "/account", replace: true });
     return null;
   }
 
   function switchMode(next: AuthMode) {
+    clearPasswordRecovery();
     setMode(next);
     setMessage("");
     setStatus("idle");
@@ -75,7 +82,7 @@ function AuthPage() {
     setStatus("sending");
     setMessage("");
 
-    if (mode === "forgot") {
+    if (view === "forgot" || resetLinkExpired) {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/auth`,
       });
@@ -83,17 +90,32 @@ function AuthPage() {
         setStatus("error");
         setMessage(error.message);
       } else {
+        clearPasswordRecovery();
+        setMode("forgot");
         setStatus("confirm");
         setMessage("Check your email for a link to reset your password.");
       }
       return;
     }
 
-    if (mode === "reset") {
+    if (view === "reset") {
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) {
+        clearPasswordRecovery();
+        setMode("forgot");
+        setStatus("error");
+        setMessage(expiredResetMessage);
+        return;
+      }
       const { error } = await supabase.auth.updateUser({ password });
       if (error) {
+        const missingSession = /session missing/i.test(error.message);
+        if (missingSession) {
+          clearPasswordRecovery();
+          setMode("forgot");
+        }
         setStatus("error");
-        setMessage(error.message);
+        setMessage(missingSession ? expiredResetMessage : error.message);
         return;
       }
       clearPasswordRecovery();
@@ -101,7 +123,7 @@ function AuthPage() {
       return;
     }
 
-    if (mode === "sign-up") {
+    if (view === "sign-up") {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -146,25 +168,27 @@ function AuthPage() {
       <main className="flex flex-1 items-center justify-center px-5 py-14 lg:py-[85px]">
         <section className="w-full max-w-[520px] rounded-[10px] bg-sky-blue px-8 py-10 text-white shadow-big-shadow lg:px-12 lg:py-12">
           <h1 className="text-[2.25rem] font-normal leading-tight lg:text-5xl">
-            {mode === "sign-in"
+            {view === "sign-in"
               ? "Welcome back"
-              : mode === "sign-up"
+              : view === "sign-up"
                 ? "Create your account"
-                : mode === "forgot"
+                : view === "forgot" || resetLinkExpired
                   ? "Reset your password"
                   : "Choose a new password"}
           </h1>
           <p className="mt-4 text-lg">
-            {mode === "sign-in"
+            {view === "sign-in"
               ? "Sign in to access your Employee Resource Library account."
-              : mode === "sign-up"
+              : view === "sign-up"
                 ? "Join Build Financial Wellness to start your journey."
-                : mode === "forgot"
-                  ? "Enter the email on your account and we'll send a link to choose a new password."
-                  : "Enter a new password for your account."}
+                : resetLinkExpired
+                  ? expiredResetMessage
+                  : view === "forgot"
+                    ? "Enter the email on your account and we'll send a link to choose a new password."
+                    : "Enter a new password for your account."}
           </p>
           <form onSubmit={onSubmit} className="mt-8 flex flex-col gap-4">
-          {mode === "sign-up" ? (
+          {view === "sign-up" ? (
             <div>
               <label className="sr-only" htmlFor="auth-name">
                 Display name
@@ -179,7 +203,7 @@ function AuthPage() {
               />
             </div>
           ) : null}
-          {mode !== "reset" ? (
+          {view !== "reset" || resetLinkExpired ? (
             <div>
               <label className="sr-only" htmlFor="auth-email">
                 Email
@@ -195,7 +219,7 @@ function AuthPage() {
               />
             </div>
           ) : null}
-          {mode !== "forgot" ? (
+          {view !== "forgot" && !resetLinkExpired ? (
             <div className="relative">
               <label className="sr-only" htmlFor="auth-password">
                 Password
@@ -207,7 +231,7 @@ function AuthPage() {
                 minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder={mode === "reset" ? "New password" : "Password"}
+                placeholder={view === "reset" ? "New password" : "Password"}
                 className={`${inputClass} pr-12`}
               />
               <button
@@ -222,7 +246,7 @@ function AuthPage() {
               </button>
             </div>
           ) : null}
-          {mode === "sign-in" ? (
+          {view === "sign-in" ? (
             <button
               type="button"
               onClick={() => switchMode("forgot")}
@@ -238,11 +262,11 @@ function AuthPage() {
           >
             {sending
               ? "Please wait…"
-              : mode === "sign-in"
+              : view === "sign-in"
                 ? "Sign In"
-                : mode === "sign-up"
+                : view === "sign-up"
                   ? "Sign Up"
-                  : mode === "forgot"
+                  : view === "forgot" || resetLinkExpired
                     ? "Send reset link"
                     : "Update password"}
           </button>
@@ -257,13 +281,13 @@ function AuthPage() {
           ) : null}
         </form>
 
-        {mode !== "reset" ? (
+        {view !== "reset" || resetLinkExpired ? (
           <button
             type="button"
-            onClick={() => switchMode(mode === "sign-in" ? "sign-up" : "sign-in")}
+            onClick={() => switchMode(view === "sign-in" ? "sign-up" : "sign-in")}
             className="mt-6 w-full text-center text-sm font-bold text-white underline-offset-2 transition hover:underline"
           >
-            {mode === "sign-in" ? "New here? Create an account" : "Already have an account? Sign in"}
+            {view === "sign-in" ? "New here? Create an account" : "Already have an account? Sign in"}
           </button>
         ) : null}
         </section>

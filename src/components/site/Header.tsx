@@ -3,6 +3,7 @@ import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 
 import logo from "@/assets/logo-transparent-png.png";
 import { useAuth } from "@/hooks/useAuth";
+import { isPasswordRecovery } from "@/integrations/supabase/client";
 
 const linkClass =
   "whitespace-nowrap text-base font-bold text-navy-blue transition-colors hover:text-sage-green-sat50";
@@ -13,6 +14,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const { user } = useAuth();
+  const accountHref = user && !isPasswordRecovery() ? "/account" : "/auth";
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
@@ -161,7 +163,7 @@ export function Header() {
             ) : null}
           </div>
           <Link
-            to={user ? "/account" : "/auth"}
+            to={accountHref}
             className="inline-flex h-[38px] items-center rounded-[80px] bg-navy-blue px-4 text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:bg-[#57ae83]"
           >
             {user ? "My Account" : "Employee Login"}
@@ -274,7 +276,7 @@ export function Header() {
             </>
           ) : null}
           <Link
-            to={user ? "/account" : "/auth"}
+            to={accountHref}
             onClick={() => setMobileOpen(false)}
             className="mt-3 inline-flex h-[44px] items-center justify-center rounded-[80px] bg-navy-blue px-4 text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)]"
           >
