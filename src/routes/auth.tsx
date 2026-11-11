@@ -1,11 +1,13 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Eye, EyeOff } from "lucide-react";
 
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
-import { supabase } from "@/integrations/supabase/client";
+import { clearPasswordRecovery, isPasswordRecovery, supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+
+type AuthMode = "sign-in" | "sign-up" | "forgot" | "reset";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -27,26 +29,77 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
+function alreadyRegistered(message: string | undefined) {
+  return /already registered|already exists|already been registered/i.test(message ?? "");
+}
+
 function AuthPage() {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
-  const [mode, setMode] = useState<"sign-in" | "sign-up">("sign-in");
+  const [mode, setMode] = useState<AuthMode>("sign-in");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [displayName, setDisplayName] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "error" | "confirm">("idle");
   const [message, setMessage] = useState("");
+  const [checkedRecovery, setCheckedRecovery] = useState(false);
 
-  if (!loading && user) {
+  useEffect(() => {
+    if (isPasswordRecovery()) setMode("reset");
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") setMode("reset");
+    });
+    setCheckedRecovery(true);
+    return () => subscription.unsubscribe();
+  }, []);
+
+  if (!checkedRecovery || loading) return null;
+
+  if (user && mode !== "reset") {
     navigate({ to: "/account", replace: true });
     return null;
+  }
+
+  function switchMode(next: AuthMode) {
+    setMode(next);
+    setMessage("");
+    setStatus("idle");
+    setPassword("");
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("sending");
     setMessage("");
+
+    if (mode === "forgot") {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth`,
+      });
+      if (error) {
+        setStatus("error");
+        setMessage(error.message);
+      } else {
+        setStatus("confirm");
+        setMessage("Check your email for a link to reset your password.");
+      }
+      return;
+    }
+
+    if (mode === "reset") {
+      const { error } = await supabase.auth.updateUser({ password });
+      if (error) {
+        setStatus("error");
+        setMessage(error.message);
+        return;
+      }
+      clearPasswordRecovery();
+      navigate({ to: "/account" });
+      return;
+    }
 
     if (mode === "sign-up") {
       const { data, error } = await supabase.auth.signUp({
@@ -57,7 +110,11 @@ function AuthPage() {
           emailRedirectTo: window.location.origin,
         },
       });
-      if (error) {
+      const duplicate = data.user?.identities?.length === 0 || alreadyRegistered(error?.message);
+      if (duplicate) {
+        setStatus("error");
+        setMessage("This email is already in use. Sign in instead.");
+      } else if (error) {
         setStatus("error");
         setMessage(error.message);
       } else if (!data.session) {
@@ -89,12 +146,22 @@ function AuthPage() {
       <main className="flex flex-1 items-center justify-center px-5 py-14 lg:py-[85px]">
         <section className="w-full max-w-[520px] rounded-[10px] bg-sky-blue px-8 py-10 text-white shadow-big-shadow lg:px-12 lg:py-12">
           <h1 className="text-[2.25rem] font-normal leading-tight lg:text-5xl">
-            {mode === "sign-in" ? "Welcome back" : "Create your account"}
+            {mode === "sign-in"
+              ? "Welcome back"
+              : mode === "sign-up"
+                ? "Create your account"
+                : mode === "forgot"
+                  ? "Reset your password"
+                  : "Choose a new password"}
           </h1>
           <p className="mt-4 text-lg">
             {mode === "sign-in"
               ? "Sign in to access your Employee Resource Library account."
-              : "Join Build Financial Wellness to start your journey."}
+              : mode === "sign-up"
+                ? "Join Build Financial Wellness to start your journey."
+                : mode === "forgot"
+                  ? "Enter the email on your account and we'll send a link to choose a new password."
+                  : "Enter a new password for your account."}
           </p>
           <form onSubmit={onSubmit} className="mt-8 flex flex-col gap-4">
           {mode === "sign-up" ? (
@@ -112,51 +179,72 @@ function AuthPage() {
               />
             </div>
           ) : null}
-          <div>
-            <label className="sr-only" htmlFor="auth-email">
-              Email
-            </label>
-            <input
-              id="auth-email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-              className={inputClass}
-            />
-          </div>
-          <div className="relative">
-            <label className="sr-only" htmlFor="auth-password">
-              Password
-            </label>
-            <input
-              id="auth-password"
-              type={showPassword ? "text" : "password"}
-              required
-              minLength={6}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              className={`${inputClass} pr-12`}
-            />
+          {mode !== "reset" ? (
+            <div>
+              <label className="sr-only" htmlFor="auth-email">
+                Email
+              </label>
+              <input
+                id="auth-email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                className={inputClass}
+              />
+            </div>
+          ) : null}
+          {mode !== "forgot" ? (
+            <div className="relative">
+              <label className="sr-only" htmlFor="auth-password">
+                Password
+              </label>
+              <input
+                id="auth-password"
+                type={showPassword ? "text" : "password"}
+                required
+                minLength={6}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder={mode === "reset" ? "New password" : "Password"}
+                className={`${inputClass} pr-12`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((visible) => !visible)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                aria-pressed={showPassword}
+                aria-controls="auth-password"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-navy-blue transition hover:text-sage-green-sat50"
+              >
+                {showPassword ? <EyeOff className="size-5" aria-hidden="true" /> : <Eye className="size-5" aria-hidden="true" />}
+              </button>
+            </div>
+          ) : null}
+          {mode === "sign-in" ? (
             <button
               type="button"
-              onClick={() => setShowPassword((visible) => !visible)}
-              aria-label={showPassword ? "Hide password" : "Show password"}
-              aria-pressed={showPassword}
-              aria-controls="auth-password"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-navy-blue transition hover:text-sage-green-sat50"
+              onClick={() => switchMode("forgot")}
+              className="self-start text-sm font-bold text-white underline-offset-2 transition hover:underline"
             >
-              {showPassword ? <EyeOff className="size-5" aria-hidden="true" /> : <Eye className="size-5" aria-hidden="true" />}
+              Forgot password?
             </button>
-          </div>
+          ) : null}
           <button
             type="submit"
             disabled={sending}
             className="mt-2 h-[54px] rounded-[80px] bg-burnt-orange px-10 text-base font-bold text-white shadow-[0px_4px_3px_0px_rgb(0_0_0_/_0.35)] transition hover:brightness-110 disabled:opacity-70"
           >
-            {sending ? "Please wait…" : mode === "sign-in" ? "Sign In" : "Sign Up"}
+            {sending
+              ? "Please wait…"
+              : mode === "sign-in"
+                ? "Sign In"
+                : mode === "sign-up"
+                  ? "Sign Up"
+                  : mode === "forgot"
+                    ? "Send reset link"
+                    : "Update password"}
           </button>
           {message ? (
             <p
@@ -169,19 +257,15 @@ function AuthPage() {
           ) : null}
         </form>
 
-        <button
-          type="button"
-          onClick={() => {
-            setMode(mode === "sign-in" ? "sign-up" : "sign-in");
-            setMessage("");
-            setStatus("idle");
-          }}
-          className="mt-6 w-full text-center text-sm font-bold text-white underline-offset-2 transition hover:underline"
-        >
-          {mode === "sign-in"
-            ? "New here? Create an account"
-            : "Already have an account? Sign in"}
-        </button>
+        {mode !== "reset" ? (
+          <button
+            type="button"
+            onClick={() => switchMode(mode === "sign-in" ? "sign-up" : "sign-in")}
+            className="mt-6 w-full text-center text-sm font-bold text-white underline-offset-2 transition hover:underline"
+          >
+            {mode === "sign-in" ? "New here? Create an account" : "Already have an account? Sign in"}
+          </button>
+        ) : null}
         </section>
       </main>
       <Footer />
