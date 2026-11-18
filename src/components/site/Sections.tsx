@@ -170,13 +170,13 @@ export function Services() {
 
         <div className="mt-12 grid items-stretch gap-8 lg:grid-cols-2">
           <article className="flex h-full flex-col overflow-hidden rounded bg-white shadow-big-shadow">
-            <div className="relative h-44 md:h-72 lg:h-44">
+            <div className="relative sm:h-44 md:h-72 lg:h-44">
               <img
                 src={individualsBanner}
                 alt="A family drawing together at a table"
-                className="h-full w-full object-cover object-[center_30%]"
+                className="h-44 w-full object-cover object-[center_30%] sm:absolute sm:inset-0 sm:h-full"
               />
-              <h3 className="absolute inset-x-5 bottom-4 text-2xl font-bold leading-tight text-white">
+              <h3 className="relative px-5 py-3 text-2xl font-bold leading-tight text-white sm:absolute sm:inset-x-5 sm:bottom-4 sm:px-0 sm:py-0">
                 <span className="box-decoration-clone rounded-md bg-slate-800/55 px-2 py-0.5">
                   Support for Individuals and Households
                 </span>
@@ -209,13 +209,13 @@ export function Services() {
           </article>
 
           <article className="flex h-full flex-col overflow-hidden rounded bg-white shadow-big-shadow">
-            <div className="relative h-44 md:h-72 lg:h-44">
+            <div className="relative sm:h-44 md:h-72 lg:h-44">
               <img
                 src={employersBanner}
                 alt="Four colleagues talking together in a bright office"
-                className="h-full w-full object-cover object-[center_28%]"
+                className="h-auto w-full object-cover sm:absolute sm:inset-0 sm:h-full sm:object-[center_28%]"
               />
-              <h3 className="absolute inset-x-5 bottom-4 text-2xl font-bold leading-tight text-white">
+              <h3 className="relative px-5 py-3 text-2xl font-bold leading-tight text-white sm:absolute sm:inset-x-5 sm:bottom-4 sm:px-0 sm:py-0">
                 <span className="box-decoration-clone rounded-md bg-slate-800/55 px-2 py-0.5">
                   Support for Employers & Organizations
                 </span>
