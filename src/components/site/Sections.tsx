@@ -177,7 +177,7 @@ export function Services() {
                 className="h-44 w-full object-cover object-[center_30%] sm:absolute sm:inset-0 sm:h-full"
               />
               <h3 className="relative px-5 py-3 text-2xl font-bold leading-tight text-white sm:absolute sm:inset-x-5 sm:bottom-4 sm:px-0 sm:py-0">
-                <span className="box-decoration-clone rounded-md bg-slate-800/55 px-2 py-0.5">
+                <span className="box-decoration-clone rounded-md bg-navy-blue/70 px-2 py-0.5">
                   Support for Individuals and Households
                 </span>
               </h3>
@@ -216,7 +216,7 @@ export function Services() {
                 className="h-auto w-full object-cover sm:absolute sm:inset-0 sm:h-full sm:object-[center_28%]"
               />
               <h3 className="relative px-5 py-3 text-2xl font-bold leading-tight text-white sm:absolute sm:inset-x-5 sm:bottom-4 sm:px-0 sm:py-0">
-                <span className="box-decoration-clone rounded-md bg-slate-800/55 px-2 py-0.5">
+                <span className="box-decoration-clone rounded-md bg-sage-green-sat50/80 px-2 py-0.5">
                   Support for Employers & Organizations
                 </span>
               </h3>
