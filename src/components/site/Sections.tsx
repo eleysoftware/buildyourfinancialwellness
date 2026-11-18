@@ -212,7 +212,7 @@ export function Services() {
             <div className="relative h-44 md:h-72 lg:h-44">
               <img
                 src={employersBanner}
-                alt="Coworkers talking together in an office"
+                alt="Four colleagues talking together in a bright office"
                 className="h-full w-full object-cover object-[center_28%]"
               />
               <h3 className="absolute inset-x-5 bottom-4 text-2xl font-bold leading-tight text-white">
